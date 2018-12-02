@@ -15,3 +15,10 @@ graphics:
   - [ ] Gold
   - [ ] Food
   - [ ] Arrow
+  
+  **Portraits**
+  
+  - [ ] God of food
+  - [ ] God of resources
+  - [ ] God of people
+  - [ ] God of gold
