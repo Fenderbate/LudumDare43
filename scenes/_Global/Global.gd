@@ -31,6 +31,8 @@ var village_response = [
 
 ]
 
+var no_negative = true
+
 var food = 100
 var resources = 200
 var people = 50
@@ -46,10 +48,30 @@ var base_dungeon_needs = {"People":20,"Food":20,"Resources":50,"Gold":200}
 var base_granary_needs = {"People":10,"Resources":20,"Gold":100}
 var base_factory_needs = {"Poeple":30,"Food":30,"Gold":300}
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func set_food(value):
+	
+	if value >= 0:
+		food = value
+	else:
+		food = 0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func set_resources(value):
+
+	if value >= 0:
+		resources = value
+	else:
+		resources = 0
+
+func set_people(value):
+
+	if value >= 0:
+		people = value
+	else:
+		 people = 0
+
+func set_gold(value):
+
+	if value >= 0:
+		gold = value
+	else:
+		gold = 0

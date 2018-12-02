@@ -1,7 +1,7 @@
 extends Node2D
 
 var foodrate = 1.0 setget set_foodrate
-var pplrate = 0.5 setget set_pplrate
+var pplrate = 1 setget set_pplrate
 var resrate = 2.0 setget set_resrate
 var goldrate = 10.0 setget set_goldrate
 
@@ -226,10 +226,10 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.start()
 				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				Global.food -= Global.food * 0.25 if Global.food > 35 else 15
-				Global.people -= Global.people * 0.25 if Global.people > 15 else 5
-				Global.resources -= Global.resources * 0.25 if Global.resources > 35 else 20
-				Global.gold -= Global.gold * 0.25 if Global.gold > 400 else 100
+				Global.food -= round(Global.food * 0.25) if Global.food > 35 else 15
+				Global.people -= round(Global.people * 0.25) if Global.people > 15 else 5
+				Global.resources -= round(Global.resources * 0.25) if Global.resources > 35 else 20
+				Global.gold -= round(Global.gold * 0.25) if Global.gold > 400 else 100
 				set_menu_info_nopar()
 				up = true
 			else:
@@ -240,6 +240,12 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
 				up = false
+		"BotMenu":
+			if $Timers/GodTimer.time_left > 0:
+				$UI/BotMenu.rect_position.y = 720
+		_:
+			return
+			print(object.name)
 
 
 func _on_Village_area_entered(area):
@@ -273,11 +279,13 @@ func _on_AnimPlayerRemover_timeout():
 	if $AnimPlayers.get_child_count() > 0:
 		$AnimPlayers.get_children()[0].queue_free()
 
-var bot_menu_up = false
 
 func _on_PopupButton_button_down():
-	if !bot_menu_up:
-		$Tween.interpolate_property(
+	$UI/BotMenu/BotMenuTween.stop($UI/BotMenu,"rect_position")
+	if $UI/BotMenu/PopupButton/Arrow.scale.y == 1:
+		if $Timers/GodTimer.time_left > 0:
+			return
+		$UI/BotMenu/BotMenuTween.interpolate_property(
 		$UI/BotMenu,"rect_position",
 		$UI/BotMenu.rect_position,
 		Vector2(0,420),
@@ -286,9 +294,9 @@ func _on_PopupButton_button_down():
 		Tween.EASE_OUT
 		)
 		$UI/BotMenu/PopupButton/Arrow.scale.y = -1
-		bot_menu_up = true
-	else:
-		$Tween.interpolate_property(
+		$UI/BotMenu/BotMenuTween.start()
+	elif $UI/BotMenu/PopupButton/Arrow.scale.y == -1:
+		$UI/BotMenu/BotMenuTween.interpolate_property(
 		$UI/BotMenu,"rect_position",
 		$UI/BotMenu.rect_position,
 		Vector2(0,720),
@@ -297,5 +305,33 @@ func _on_PopupButton_button_down():
 		Tween.EASE_OUT
 		)
 		$UI/BotMenu/PopupButton/Arrow.scale.y = 1
-		bot_menu_up = false
-	$Tween.start()
+		$UI/BotMenu/BotMenuTween.start()
+
+func _on_God_button_down(namee):
+	if $Timers/GodTimer.time_left > 0:
+			return
+	match namee:
+		"Kaja":
+			if Global.gold > 0:
+				Global.gold -= 200
+				Global.food += 100
+		"Anyag":
+			if Global.gold > 0:
+				Global.gold -= 200
+				Global.resources += 100
+		"Ember":
+			if Global.gold > 0:
+				Global.gold -= 200
+				Global.people += 50
+		"Arany":
+			if Global.people > 0 and Global.resources > 0 and Global.food > 0:
+				Global.gold += 1000
+				Global.resources -= 100
+				Global.food -= 50
+				Global.people -= 20
+	
+	set_menu_info_nopar()
+	_on_PopupButton_button_down()
+	
+	$Timers/GodTimer.start()
+
