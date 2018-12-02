@@ -9,6 +9,7 @@ var bubble = preload("res://scenes/TextBubble/TextBubble.tscn")
 
 #animations
 var boop_animation = preload("res://animatons/Boop.tres")
+var icon_boop_animation = preload("res://animatons/IconBoop.tres")
 
 #sounds
 
@@ -30,6 +31,9 @@ var village_response = [
 "We're gettin' another bed!"
 
 ]
+
+#images
+var gold_icon = preload("res://icon.png")
 
 var no_negative = true
 

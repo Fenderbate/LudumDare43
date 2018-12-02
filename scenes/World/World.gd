@@ -74,6 +74,8 @@ func info_text(text,position):
 func spawn_floater(start_position,text,icon = null):
 	var f = Global.floater.instance()
 	f.position = (start_position + Vector2(0,-100)) + Vector2(rand_range(-25,25),rand_range(-25,25))
+	if icon != null:
+		f.get_node("Icon").texture = icon
 	f.text = text
 	add_child(f)
 	
@@ -133,6 +135,18 @@ func animate(sprite):
 	if $AnimPlayers.get_child_count() >= 10:
 		$AnimPlayers.get_children()[0].queue_free()
 
+func animate_icon(sprite):
+	var ap = AnimationPlayer.new()
+	var anim = Global.icon_boop_animation
+	#print(anim.track_get_path(0))
+	$AnimPlayers.add_child(ap)
+	anim.track_set_path(0,str(sprite,":scale"))
+	ap.add_animation("booop",anim)
+	ap.play("booop")
+	
+	if $AnimPlayers.get_child_count() >= 10:
+		$AnimPlayers.get_children()[0].queue_free()
+
 func _on_Building_input_event(viewport, event, shape_idx, building_name):
 	
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
@@ -140,8 +154,10 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 			"Castle":
 				Global.gold += 10
 				set_menu_info_nopar()
-				spawn_floater($Castle.position,"Gold +10")
+				spawn_floater($Castle.position,"Gold +10",load("res://art/Gold.png"))
 				animate($Castle/Sprite.get_path())
+				animate_icon($UI/TopMenu/Gold/Icon.get_path())
+				
 			"Factory":
 				if $Timers/FactoryTick.wait_time > factory_tick_max / 2:
 					$Timers/FactoryTick.wait_time -= $Timers/FactoryTick.wait_time * click_reduce
