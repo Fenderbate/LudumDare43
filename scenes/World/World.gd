@@ -129,6 +129,9 @@ func animate(sprite):
 	anim.track_set_path(0,str(sprite,":scale"))
 	ap.add_animation("booop",anim)
 	ap.play("booop")
+	
+	if $AnimPlayers.get_child_count() >= 10:
+		$AnimPlayers.get_children()[0].queue_free()
 
 func _on_Building_input_event(viewport, event, shape_idx, building_name):
 	
@@ -269,12 +272,6 @@ func _on_Villagetick_timeout():
 		return
 	Global.people += pplrate
 	spawn_floater($Village.position,str("Poeple +",pplrate))
-
-
-func _on_AnimPlayerRemover_timeout():
-	if $AnimPlayers.get_child_count() > 0:
-		$AnimPlayers.get_children()[0].queue_free()
-
 
 func _on_PopupButton_button_down():
 	$UI/BotMenu/BotMenuTween.stop($UI/BotMenu,"rect_position")

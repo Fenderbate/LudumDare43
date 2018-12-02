@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=5]
 [ext_resource path="res://art/dark.png" type="Texture" id=6]
 [ext_resource path="res://art/Village.png" type="Texture" id=7]
+[ext_resource path="res://art/Granary.png" type="Texture" id=8]
 
 [sub_resource type="CapsuleShape2D" id=2]
 
@@ -18,6 +19,11 @@ height = 106.422
 
 custom_solver_bias = 0.0
 extents = Vector2( 67.3942, 80.4605 )
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 121.037
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -34,19 +40,12 @@ blend_times = [  ]
 [node name="AnimPlayers" type="Node" parent="."]
 
 [node name="Timers" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="GodTimer" type="Timer" parent="Timers"]
 process_mode = 1
 wait_time = 30.0
 one_shot = true
 autostart = false
-
-[node name="AnimPlayerRemover" type="Timer" parent="Timers"]
-process_mode = 1
-wait_time = 0.25
-one_shot = false
-autostart = true
 
 [node name="ResourceTick" type="Timer" parent="Timers"]
 process_mode = 1
@@ -112,6 +111,7 @@ one_shot = true
 autostart = false
 
 [node name="UI" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -776,7 +776,6 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 3 )
 
 [node name="Factory" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 303, 583 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -787,13 +786,14 @@ audio_bus_override = false
 audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Factory"]
-shape = SubResource( 1 )
+position = Vector2( 0, 13 )
+shape = SubResource( 3 )
 
 [node name="WidgetPivot" type="Position2D" parent="Factory"]
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Factory"]
-texture = ExtResource( 3 )
+texture = ExtResource( 8 )
 
 [node name="Granary" type="Area2D" parent="."]
 editor/display_folded = true
@@ -855,7 +855,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[connection signal="timeout" from="Timers/AnimPlayerRemover" to="." method="_on_AnimPlayerRemover_timeout"]
 [connection signal="timeout" from="Timers/ReduceTick" to="." method="_on_ReduceTick_timeout"]
 [connection signal="timeout" from="Timers/FactoryTick" to="." method="_on_FactoryTick_timeout"]
 [connection signal="timeout" from="Timers/GranaryTick" to="." method="_on_GranaryTick_timeout"]
