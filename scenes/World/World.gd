@@ -55,7 +55,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	set_menu_info_nopar()
-	
+	$UI/BotMenu/PopupButton/Progress.value = float($Timers/GodTimer.time_left / $Timers/GodTimer.wait_time) * 100
 	
 
 func _input(event):
@@ -125,7 +125,7 @@ func text_bubble(target,text):
 
 func animate(sprite):
 	var ap = AnimationPlayer.new()
-	var anim = Global.boop_animation
+	var anim = Global.boop_animation.duplicate()
 	#print(anim.track_get_path(0))
 	$AnimPlayers.add_child(ap)
 	anim.track_set_path(0,str(sprite,":scale"))
@@ -137,7 +137,7 @@ func animate(sprite):
 
 func animate_icon(sprite):
 	var ap = AnimationPlayer.new()
-	var anim = Global.icon_boop_animation
+	var anim = Global.icon_boop_animation.duplicate()
 	#print(anim.track_get_path(0))
 	$AnimPlayers.add_child(ap)
 	anim.track_set_path(0,str(sprite,":scale"))
@@ -146,6 +146,20 @@ func animate_icon(sprite):
 	
 	if $AnimPlayers.get_child_count() >= 10:
 		$AnimPlayers.get_children()[0].queue_free()
+
+func click_info(text, color = Color(1,1,1,1)):
+	$UI/ClickInfoLabel.modulate = color
+	$UI/ClickInfoLabel.text = text
+	$UI/ClickInfoLabel/Tween.interpolate_property(
+			$UI/ClickInfoLabel,
+			"modulate",
+			color,
+			Color(color.a,color.g,color.b,0),
+			3,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_IN
+			)
+	$UI/ClickInfoLabel/Tween.start()
 
 func _on_Building_input_event(viewport, event, shape_idx, building_name):
 	
@@ -275,6 +289,7 @@ func _on_FactoryTick_timeout():
 		return
 	Global.resources += resrate
 	spawn_floater($Factory.position,str("Resources +",resrate),Global.resource_icon)
+	animate_icon($UI/TopMenu/Resources/Icon.get_path())
 
 
 func _on_GranaryTick_timeout():
@@ -282,17 +297,21 @@ func _on_GranaryTick_timeout():
 		return
 	Global.food += foodrate
 	spawn_floater($Granary.position,str("Food +",foodrate),Global.food_icon)
+	animate_icon($UI/TopMenu/Food/Icon.get_path())
 
 func _on_Villagetick_timeout():
 	if Global.food <= 0 and Global.gold <= 0:
 		return
 	Global.people += pplrate
-	spawn_floater($Village.position,str("Poeple +",pplrate))
+	spawn_floater($Village.position,str("Poeple +",pplrate),Global.people_icon)
+	animate_icon($UI/TopMenu/People/Icon.get_path())
 
 func _on_PopupButton_button_down():
 	$UI/BotMenu/BotMenuTween.stop($UI/BotMenu,"rect_position")
+	
 	if $UI/BotMenu/PopupButton/Arrow.scale.y == 1:
 		if $Timers/GodTimer.time_left > 0:
+			click_info("The gods don't need another sacrifice yet.")
 			return
 		$UI/BotMenu/BotMenuTween.interpolate_property(
 		$UI/BotMenu,"rect_position",
@@ -338,6 +357,8 @@ func _on_God_button_down(namee):
 				Global.resources -= 100
 				Global.food -= 50
 				Global.people -= 20
+	
+	click_info("The gods have accepted your sacrifice.",Color("#f7bc33"))
 	
 	set_menu_info_nopar()
 	_on_PopupButton_button_down()

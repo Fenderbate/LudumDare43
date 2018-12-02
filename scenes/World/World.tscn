@@ -1,17 +1,20 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
-[ext_resource path="res://art/Food.png" type="Texture" id=3]
-[ext_resource path="res://misc/Font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://art/People.png" type="Texture" id=5]
-[ext_resource path="res://art/Resource.png" type="Texture" id=6]
-[ext_resource path="res://art/Gold.png" type="Texture" id=7]
-[ext_resource path="res://icon.png" type="Texture" id=8]
-[ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=9]
-[ext_resource path="res://art/dark.png" type="Texture" id=10]
-[ext_resource path="res://art/Village.png" type="Texture" id=11]
-[ext_resource path="res://art/Granary.png" type="Texture" id=12]
+[ext_resource path="res://misc/Font_x72_outlined.tres" type="DynamicFont" id=3]
+[ext_resource path="res://art/Food.png" type="Texture" id=4]
+[ext_resource path="res://misc/Font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://art/People.png" type="Texture" id=6]
+[ext_resource path="res://art/Resource.png" type="Texture" id=7]
+[ext_resource path="res://art/Gold.png" type="Texture" id=8]
+[ext_resource path="res://art/Good_arrow.png" type="Texture" id=9]
+[ext_resource path="res://art/black_pixel.png" type="Texture" id=10]
+[ext_resource path="res://icon.png" type="Texture" id=11]
+[ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=12]
+[ext_resource path="res://art/dark.png" type="Texture" id=13]
+[ext_resource path="res://art/Village.png" type="Texture" id=14]
+[ext_resource path="res://art/Granary.png" type="Texture" id=15]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -127,7 +130,38 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
+[node name="ClickInfoLabel" type="Label" parent="UI"]
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 102.0
+margin_right = 1280.0
+margin_bottom = 319.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+align = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Tween" type="Tween" parent="UI/ClickInfoLabel"]
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
 [node name="TopMenu" type="ColorRect" parent="UI"]
+editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -163,7 +197,7 @@ size_flags_vertical = 1
 light_mask = 0
 position = Vector2( 20, 25 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Food"]
 light_mask = 0
@@ -180,7 +214,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -206,7 +240,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/People"]
 light_mask = 0
 position = Vector2( 19, 24 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/People"]
 light_mask = 0
@@ -223,7 +257,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -250,7 +284,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Resources"]
 light_mask = 0
 position = Vector2( 17, 28 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Resources"]
 light_mask = 0
@@ -267,7 +301,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -294,7 +328,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Gold"]
 light_mask = 0
 position = Vector2( 20, 20 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Gold"]
 light_mask = 0
@@ -311,7 +345,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -333,7 +367,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Food                              People                          Resources                 Gold"
 align = 1
 valign = 1
@@ -342,7 +376,6 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="BotMenu" type="ColorRect" parent="UI"]
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -358,13 +391,14 @@ size_flags_vertical = 1
 color = Color( 0.211765, 0.164706, 0.117647, 1 )
 
 [node name="PopupButton" type="TextureButton" parent="UI/BotMenu"]
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = -61.0
-margin_right = 130.0
+margin_left = 538.0
+margin_top = -62.0
+margin_right = 724.0
+margin_bottom = -1.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -393,7 +427,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Gods"
 percent_visible = 1.0
 lines_skipped = 0
@@ -401,7 +435,43 @@ max_lines_visible = -1
 
 [node name="Arrow" type="Sprite" parent="UI/BotMenu/PopupButton"]
 position = Vector2( 166, 28 )
-texture = ExtResource( 8 )
+rotation = 3.14159
+texture = ExtResource( 9 )
+
+[node name="Progress" type="TextureProgress" parent="UI/BotMenu/PopupButton"]
+modulate = Color( 1, 1, 1, 0.643137 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -185.0
+margin_bottom = -60.0
+rect_scale = Vector2( 180, 61.88 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+page = 0.0
+value = 100.0
+exp_edit = false
+rounded = false
+allow_greater = false
+allow_lesser = false
+texture_under = null
+texture_over = null
+texture_progress = ExtResource( 10 )
+fill_mode = 3
+tint_under = Color( 1, 1, 1, 1 )
+tint_over = Color( 1, 1, 1, 1 )
+tint_progress = Color( 1, 1, 1, 1 )
+radial_fill_degrees = 360.0
+radial_center_offset = Vector2( 0, 0 )
+nine_patch_stretch = false
 
 [node name="Kaja" type="TextureButton" parent="UI/BotMenu"]
 editor/display_folded = true
@@ -424,7 +494,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 11 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/Kaja"]
@@ -442,7 +512,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Kaja
 Gold -200
 Food + 100"
@@ -473,7 +543,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 11 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/Anyag"]
@@ -491,7 +561,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Anyag
 Gold -200
 Resources + 100"
@@ -522,7 +592,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 11 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/Ember"]
@@ -540,7 +610,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Ember
 Gold -200
 People + 50"
@@ -570,7 +640,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 8 )
+texture_normal = ExtResource( 11 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/Arany"]
@@ -580,18 +650,21 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 2.0
 margin_top = 148.0
-margin_right = 146.0
-margin_bottom = 253.0
+margin_right = 166.0
+margin_bottom = 320.0
+rect_scale = Vector2( 0.9, 0.9 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 text = "Arany
-Gold -200
-People + 50"
+Gold +1000
+Resources -100
+Food -50
+People -20"
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -608,6 +681,7 @@ playback/speed = 1.0
 
 [node name="Lost" type="TextureRect" parent="UI"]
 pause_mode = 2
+editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -633,7 +707,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 9 )
+custom_fonts/font = ExtResource( 12 )
 text = "All your people died.
 Your kingdom has fallen."
 align = 1
@@ -646,7 +720,7 @@ max_lines_visible = -1
 position = Vector2( 643, 693 )
 enabled = true
 editor_only = false
-texture = ExtResource( 10 )
+texture = ExtResource( 13 )
 offset = Vector2( 0, 0 )
 texture_scale = 15.0
 color = Color( 1, 1, 1, 1 )
@@ -719,7 +793,7 @@ color = Color( 0, 0.858824, 1, 1 )
 [node name="Demon" type="Sprite" parent="."]
 position = Vector2( 643, 295 )
 scale = Vector2( 2.76563, 1.84375 )
-texture = ExtResource( 8 )
+texture = ExtResource( 11 )
 
 [node name="Ground" type="ColorRect" parent="."]
 anchor_left = 0.0
@@ -728,8 +802,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = -118.0
 margin_top = 222.0
-margin_right = 1410.0
-margin_bottom = 792.0
+margin_right = 1382.0
+margin_bottom = 822.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -758,7 +832,7 @@ shape = SubResource( 1 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Village"]
-texture = ExtResource( 11 )
+texture = ExtResource( 14 )
 
 [node name="Castle" type="Area2D" parent="."]
 editor/display_folded = true
@@ -778,7 +852,7 @@ shape = SubResource( 2 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Castle"]
-texture = ExtResource( 8 )
+texture = ExtResource( 11 )
 
 [node name="Factory" type="Area2D" parent="."]
 editor/display_folded = true
@@ -799,7 +873,7 @@ shape = SubResource( 3 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Factory"]
-texture = ExtResource( 8 )
+texture = ExtResource( 11 )
 
 [node name="Granary" type="Area2D" parent="."]
 editor/display_folded = true
@@ -820,7 +894,7 @@ shape = SubResource( 4 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Granary"]
-texture = ExtResource( 12 )
+texture = ExtResource( 15 )
 
 [node name="Dungeon" type="Area2D" parent="."]
 editor/display_folded = true
@@ -855,7 +929,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 5 )
 align = 1
 valign = 1
 percent_visible = 1.0
