@@ -33,7 +33,8 @@ var village_response = [
 ]
 
 #images
-var gold_icon = preload("res://icon.png")
+var gold_icon = preload("res://art/Gold.png")
+var resource_icon = preload("res://art/Resource.png")
 
 var no_negative = true
 

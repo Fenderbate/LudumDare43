@@ -154,7 +154,7 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 			"Castle":
 				Global.gold += 10
 				set_menu_info_nopar()
-				spawn_floater($Castle.position,"Gold +10",load("res://art/Gold.png"))
+				spawn_floater($Castle.position,"Gold +10",Global.gold_icon)
 				animate($Castle/Sprite.get_path())
 				animate_icon($UI/TopMenu/Gold/Icon.get_path())
 				
@@ -274,7 +274,7 @@ func _on_FactoryTick_timeout():
 	if Global.food <= 0 and Global.gold <= 0:
 		return
 	Global.resources += resrate
-	spawn_floater($Factory.position,str("Resources +",resrate))
+	spawn_floater($Factory.position,str("Resources +",resrate),Global.resource_icon)
 
 
 func _on_GranaryTick_timeout():

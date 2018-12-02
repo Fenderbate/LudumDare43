@@ -1,22 +1,25 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://misc/Font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://art/Gold.png" type="Texture" id=5]
-[ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=6]
-[ext_resource path="res://art/dark.png" type="Texture" id=7]
-[ext_resource path="res://art/Village.png" type="Texture" id=8]
-[ext_resource path="res://art/Granary.png" type="Texture" id=9]
+[ext_resource path="res://art/Resource.png" type="Texture" id=5]
+[ext_resource path="res://art/Gold.png" type="Texture" id=6]
+[ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=7]
+[ext_resource path="res://art/dark.png" type="Texture" id=8]
+[ext_resource path="res://art/Village.png" type="Texture" id=9]
+[ext_resource path="res://art/Granary.png" type="Texture" id=10]
 
-[sub_resource type="CapsuleShape2D" id=2]
+
+
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
 radius = 89.0
 height = 106.422
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 67.3942, 80.4605 )
@@ -25,6 +28,11 @@ extents = Vector2( 67.3942, 80.4605 )
 
 custom_solver_bias = 0.0
 radius = 121.037
+
+[sub_resource type="CircleShape2D" id=4]
+
+custom_solver_bias = 0.0
+radius = 119.151
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -135,6 +143,7 @@ size_flags_vertical = 1
 color = Color( 0.211765, 0.164706, 0.117647, 1 )
 
 [node name="Food" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -177,6 +186,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="People" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -238,8 +248,8 @@ size_flags_vertical = 1
 
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Resources"]
 light_mask = 0
-position = Vector2( 20, 20 )
-texture = ExtResource( 3 )
+position = Vector2( 17, 28 )
+texture = ExtResource( 5 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Resources"]
 light_mask = 0
@@ -263,6 +273,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Gold" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -282,7 +293,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Gold"]
 light_mask = 0
 position = Vector2( 20, 20 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Gold"]
 light_mask = 0
@@ -621,7 +632,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 7 )
 text = "All your people died.
 Your kingdom has fallen."
 align = 1
@@ -634,7 +645,7 @@ max_lines_visible = -1
 position = Vector2( 643, 693 )
 enabled = true
 editor_only = false
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 offset = Vector2( 0, 0 )
 texture_scale = 15.0
 color = Color( 1, 1, 1, 1 )
@@ -740,13 +751,13 @@ audio_bus_name = "Master"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village"]
 position = Vector2( -12, 19 )
 rotation = 1.61301
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="WidgetPivot" type="Position2D" parent="Village"]
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Village"]
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Castle" type="Area2D" parent="."]
 editor/display_folded = true
@@ -760,7 +771,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Castle"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="WidgetPivot" type="Position2D" parent="Castle"]
 position = Vector2( -76.2837, 69.7589 )
@@ -769,6 +780,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 3 )
 
 [node name="Factory" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 303, 583 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -786,7 +798,7 @@ shape = SubResource( 3 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Factory"]
-texture = ExtResource( 9 )
+texture = ExtResource( 3 )
 
 [node name="Granary" type="Area2D" parent="."]
 editor/display_folded = true
@@ -800,13 +812,14 @@ audio_bus_override = false
 audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Granary"]
-shape = SubResource( 1 )
+position = Vector2( -1, 22 )
+shape = SubResource( 4 )
 
 [node name="WidgetPivot" type="Position2D" parent="Granary"]
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Granary"]
-texture = ExtResource( 3 )
+texture = ExtResource( 10 )
 
 [node name="Dungeon" type="Area2D" parent="."]
 editor/display_folded = true
@@ -820,7 +833,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="WidgetPivot" type="Position2D" parent="Dungeon"]
 position = Vector2( -76.2837, 69.7589 )
