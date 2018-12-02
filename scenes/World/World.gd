@@ -3,7 +3,7 @@ extends Node2D
 var foodrate = 1.0 setget set_foodrate
 var pplrate = 1 setget set_pplrate
 var resrate = 2.0 setget set_resrate
-var goldrate = 10.0 setget set_goldrate
+var goldrate = 25.0 setget set_goldrate
 
 var up = false
 
@@ -12,6 +12,7 @@ var click_reduce = 0.05
 var factory_tick_max = 2.0
 var granary_tick_max = 1.0
 var village_tick_max = 3.0
+var castle_tick_max = 1.0
 
 var no_people = false
 var no_gold = false
@@ -43,6 +44,7 @@ func _ready():
 	$Timers/FactoryTick.start()
 	$Timers/GranaryTick.start()
 	$Timers/VillageTick.start()
+	$Timers/CastleTick.start()
 	
 	$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,100),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
@@ -166,12 +168,20 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 	if event is InputEventMouseButton and event.button_index == 1 and event.pressed:
 		match building_name:
 			"Castle":
-				Global.gold += 10
-				set_menu_info_nopar()
-				spawn_floater($Castle.position,"Gold +10",Global.gold_icon)
-				animate($Castle/Sprite.get_path())
-				animate_icon($UI/TopMenu/Gold/Icon.get_path())
+#				Global.gold += 10
+#				set_menu_info_nopar()
+#				spawn_floater($Castle.position,"Gold +10",Global.gold_icon)
+#				animate($Castle/Sprite.get_path())
+#				animate_icon($UI/TopMenu/Gold/Icon.get_path())
+				if $Timers/CastleTick.wait_time > castle_tick_max / 4:
+					$Timers/CastleTick.wait_time -= $Timers/CastleTick.wait_time * click_reduce * 2
+					animate($Castle/Sprite.get_path())
+					
+					if $Timers/ClickedTimers/CastleTimer.time_left <= 0:
+						text_bubble($Castle,Global.click_response_generic[randi() % Global.click_response_generic.size()])
+						$Timers/ClickedTimers/CastleTimer.start()
 				
+			
 			"Factory":
 				if $Timers/FactoryTick.wait_time > factory_tick_max / 2:
 					$Timers/FactoryTick.wait_time -= $Timers/FactoryTick.wait_time * click_reduce
@@ -248,6 +258,8 @@ func _on_ReduceTick_timeout():
 		$Timers/GranaryTick.wait_time += factory_tick_max * click_reduce
 	if $Timers/VillageTick.wait_time < village_tick_max:
 		$Timers/VillageTick.wait_time += factory_tick_max * click_reduce
+	if $Timers/CastleTick.wait_time < castle_tick_max:
+		$Timers/CastleTick.wait_time += castle_tick_max * click_reduce * 3
 
 
 
@@ -284,8 +296,14 @@ func _on_Tween_tween_completed(object, key):
 			print(object.name)
 
 
+func _on_CastleTick_timeout():
+	Global.gold += goldrate
+	spawn_floater($Castle.position,str("Resources +",goldrate),Global.gold_icon)
+	animate_icon($UI/TopMenu/Gold/Icon.get_path())
+
+
 func _on_FactoryTick_timeout():
-	if Global.food <= 0 and Global.gold <= 0:
+	if Global.food <= 0 or Global.gold <= 0:
 		return
 	Global.resources += resrate
 	spawn_floater($Factory.position,str("Resources +",resrate),Global.resource_icon)
@@ -300,7 +318,7 @@ func _on_GranaryTick_timeout():
 	animate_icon($UI/TopMenu/Food/Icon.get_path())
 
 func _on_Villagetick_timeout():
-	if Global.food <= 0 and Global.gold <= 0:
+	if Global.food <= 0 or Global.gold <= 0:
 		return
 	Global.people += pplrate
 	spawn_floater($Village.position,str("Poeple +",pplrate),Global.people_icon)
@@ -364,4 +382,7 @@ func _on_God_button_down(namee):
 	_on_PopupButton_button_down()
 	
 	$Timers/GodTimer.start()
+
+
+
 

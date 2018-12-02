@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
@@ -14,7 +14,8 @@
 [ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=12]
 [ext_resource path="res://art/dark.png" type="Texture" id=13]
 [ext_resource path="res://art/Village.png" type="Texture" id=14]
-[ext_resource path="res://art/Granary.png" type="Texture" id=15]
+[ext_resource path="res://art/Castle.png" type="Texture" id=15]
+[ext_resource path="res://art/Granary.png" type="Texture" id=16]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -25,7 +26,7 @@ height = 106.422
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 67.3942, 80.4605 )
+extents = Vector2( 122, 104 )
 
 [sub_resource type="CircleShape2D" id=3]
 
@@ -36,6 +37,11 @@ radius = 121.037
 
 custom_solver_bias = 0.0
 radius = 119.151
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 67.3942, 80.4605 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -52,7 +58,6 @@ blend_times = [  ]
 [node name="AnimPlayers" type="Node" parent="."]
 
 [node name="Timers" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="GodTimer" type="Timer" parent="Timers"]
 process_mode = 1
@@ -71,6 +76,12 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
+
+[node name="CastleTick" type="Timer" parent="Timers"]
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
 
 [node name="FactoryTick" type="Timer" parent="Timers"]
 process_mode = 1
@@ -91,7 +102,6 @@ one_shot = false
 autostart = false
 
 [node name="ClickedTimers" type="Node" parent="Timers"]
-editor/display_folded = true
 
 [node name="VillageTimer" type="Timer" parent="Timers/ClickedTimers"]
 process_mode = 1
@@ -124,6 +134,7 @@ one_shot = true
 autostart = false
 
 [node name="UI" type="CanvasLayer" parent="."]
+editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -835,7 +846,6 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 14 )
 
 [node name="Castle" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 633, 441 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -852,7 +862,7 @@ shape = SubResource( 2 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Castle"]
-texture = ExtResource( 11 )
+texture = ExtResource( 15 )
 
 [node name="Factory" type="Area2D" parent="."]
 editor/display_folded = true
@@ -894,7 +904,7 @@ shape = SubResource( 4 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Granary"]
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 
 [node name="Dungeon" type="Area2D" parent="."]
 editor/display_folded = true
@@ -908,7 +918,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon"]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="WidgetPivot" type="Position2D" parent="Dungeon"]
 position = Vector2( -76.2837, 69.7589 )
@@ -937,6 +947,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [connection signal="timeout" from="Timers/ReduceTick" to="." method="_on_ReduceTick_timeout"]
+[connection signal="timeout" from="Timers/CastleTick" to="." method="_on_CastleTick_timeout"]
 [connection signal="timeout" from="Timers/FactoryTick" to="." method="_on_FactoryTick_timeout"]
 [connection signal="timeout" from="Timers/GranaryTick" to="." method="_on_GranaryTick_timeout"]
 [connection signal="timeout" from="Timers/VillageTick" to="." method="_on_Villagetick_timeout"]
