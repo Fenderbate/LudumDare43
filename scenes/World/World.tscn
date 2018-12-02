@@ -11,8 +11,6 @@
 [ext_resource path="res://art/Village.png" type="Texture" id=9]
 [ext_resource path="res://art/Granary.png" type="Texture" id=10]
 
-
-
 [sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
