@@ -14,7 +14,7 @@ graphics:
   - [ ] People
   - [x] Gold
   - [x] Food
-  - [ ] Arrow
+  - [x] Arrow
   
   **Portraits**
   
