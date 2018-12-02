@@ -4,7 +4,7 @@ graphics:
   - [x] Granary
   - [ ] Factory
   - [ ] Dungeon
-  - [ ] Castle
+  - [x] Castle
   
   **Misc**
   - [ ] Demon
