@@ -44,11 +44,11 @@ func _ready():
 	$Timers/GranaryTick.start()
 	$Timers/VillageTick.start()
 	
-	$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,100),5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,100),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
-	$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
-	$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
 	
 
@@ -255,11 +255,11 @@ func _on_Tween_tween_completed(object, key):
 				set_menu_info_nopar()
 				up = true
 			else:
-				$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,100),5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+				$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,100),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+				$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
 				up = false
 		"BotMenu":
@@ -281,7 +281,7 @@ func _on_GranaryTick_timeout():
 	if Global.gold <= 0:
 		return
 	Global.food += foodrate
-	spawn_floater($Granary.position,str("Food +",foodrate))
+	spawn_floater($Granary.position,str("Food +",foodrate),Global.food_icon)
 
 func _on_Villagetick_timeout():
 	if Global.food <= 0 and Global.gold <= 0:
