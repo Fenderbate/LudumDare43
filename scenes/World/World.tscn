@@ -1,15 +1,16 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://art/Food.png" type="Texture" id=3]
 [ext_resource path="res://misc/Font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://art/Resource.png" type="Texture" id=5]
-[ext_resource path="res://art/Gold.png" type="Texture" id=6]
-[ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=7]
-[ext_resource path="res://art/dark.png" type="Texture" id=8]
-[ext_resource path="res://art/Village.png" type="Texture" id=9]
-[ext_resource path="res://art/Granary.png" type="Texture" id=10]
+[ext_resource path="res://icon.png" type="Texture" id=5]
+[ext_resource path="res://art/Resource.png" type="Texture" id=6]
+[ext_resource path="res://art/Gold.png" type="Texture" id=7]
+[ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=8]
+[ext_resource path="res://art/dark.png" type="Texture" id=9]
+[ext_resource path="res://art/Village.png" type="Texture" id=10]
+[ext_resource path="res://art/Granary.png" type="Texture" id=11]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -141,7 +142,6 @@ size_flags_vertical = 1
 color = Color( 0.211765, 0.164706, 0.117647, 1 )
 
 [node name="Food" type="Control" parent="UI/TopMenu"]
-editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -159,7 +159,8 @@ size_flags_vertical = 1
 
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Food"]
 light_mask = 0
-position = Vector2( 20, 20 )
+position = Vector2( 20, 25 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Food"]
@@ -204,7 +205,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/People"]
 light_mask = 0
 position = Vector2( 20, 20 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/People"]
 light_mask = 0
@@ -228,6 +229,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Resources" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -247,7 +249,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Resources"]
 light_mask = 0
 position = Vector2( 17, 28 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Resources"]
 light_mask = 0
@@ -291,7 +293,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Gold"]
 light_mask = 0
 position = Vector2( 20, 20 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Gold"]
 light_mask = 0
@@ -398,7 +400,7 @@ max_lines_visible = -1
 
 [node name="Arrow" type="Sprite" parent="UI/BotMenu/PopupButton"]
 position = Vector2( 166, 28 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
 [node name="Kaja" type="TextureButton" parent="UI/BotMenu"]
 editor/display_folded = true
@@ -421,7 +423,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 5 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/Kaja"]
@@ -470,7 +472,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 5 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/Anyag"]
@@ -519,7 +521,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 5 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/Ember"]
@@ -567,7 +569,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 3 )
+texture_normal = ExtResource( 5 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/Arany"]
@@ -630,7 +632,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 8 )
 text = "All your people died.
 Your kingdom has fallen."
 align = 1
@@ -643,7 +645,7 @@ max_lines_visible = -1
 position = Vector2( 643, 693 )
 enabled = true
 editor_only = false
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 offset = Vector2( 0, 0 )
 texture_scale = 15.0
 color = Color( 1, 1, 1, 1 )
@@ -716,7 +718,7 @@ color = Color( 0, 0.858824, 1, 1 )
 [node name="Demon" type="Sprite" parent="."]
 position = Vector2( 643, 295 )
 scale = Vector2( 2.76563, 1.84375 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
 [node name="Ground" type="ColorRect" parent="."]
 anchor_left = 0.0
@@ -755,7 +757,7 @@ shape = SubResource( 1 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Village"]
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="Castle" type="Area2D" parent="."]
 editor/display_folded = true
@@ -775,7 +777,7 @@ shape = SubResource( 2 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Castle"]
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
 [node name="Factory" type="Area2D" parent="."]
 editor/display_folded = true
@@ -796,7 +798,7 @@ shape = SubResource( 3 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Factory"]
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
 [node name="Granary" type="Area2D" parent="."]
 editor/display_folded = true
@@ -817,7 +819,7 @@ shape = SubResource( 4 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Granary"]
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 
 [node name="Dungeon" type="Area2D" parent="."]
 editor/display_folded = true
