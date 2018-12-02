@@ -7,6 +7,7 @@ graphics:
   
   **Misc**
   - [ ] Demon
+  - [ ] Wide Text Bubble
   
   **Icons**
   - [ ] Resources

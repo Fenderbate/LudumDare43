@@ -6,6 +6,18 @@ var font = preload("res://misc/Font.tres")
 #nodes
 var floater = preload("res://scenes/FloatInfo/FloatInfo.tscn")
 
+
+#animations
+var boop_animation = preload("res://animatons/Boop.tres")
+
+#sounds
+
+var talk =[
+preload("res://audio/sound/talk1.wav"),
+preload("res://audio/sound/talk2.wav"),
+preload("res://audio/sound/talk_3.wav")
+]
+
 var food = 100
 var resources = 200
 var people = 50

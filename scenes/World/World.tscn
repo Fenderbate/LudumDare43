@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://misc/Font.tres" type="DynamicFont" id=3]
-[ext_resource path="res://art/dark.png" type="Texture" id=4]
-[ext_resource path="res://art/cover_light.png" type="Texture" id=5]
+[ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
+[ext_resource path="res://icon.png" type="Texture" id=3]
+[ext_resource path="res://misc/Font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://art/dark.png" type="Texture" id=5]
+[ext_resource path="res://art/cover_light.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -14,8 +15,18 @@ extents = Vector2( 67.3942, 80.4605 )
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/boop = ExtResource( 2 )
+blend_times = [  ]
+
+[node name="AnimPlayers" type="Node" parent="."]
+
 [node name="Timers" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="ResourceTick" type="Timer" parent="Timers"]
 process_mode = 1
@@ -25,12 +36,29 @@ autostart = false
 
 [node name="ReduceTick" type="Timer" parent="Timers"]
 process_mode = 1
-wait_time = 10.0
+wait_time = 1.0
+one_shot = false
+autostart = true
+
+[node name="FactoryTick" type="Timer" parent="Timers"]
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="GranaryTick" type="Timer" parent="Timers"]
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="VillageTick" type="Timer" parent="Timers"]
+process_mode = 1
+wait_time = 3.0
 one_shot = false
 autostart = false
 
 [node name="UI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -74,7 +102,7 @@ size_flags_vertical = 1
 light_mask = 0
 position = Vector2( 20, 20 )
 scale = Vector2( 0.625, 0.625 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Food"]
 light_mask = 0
@@ -91,7 +119,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -119,7 +147,7 @@ size_flags_vertical = 1
 light_mask = 0
 position = Vector2( 20, 20 )
 scale = Vector2( 0.625, 0.625 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/People"]
 light_mask = 0
@@ -136,7 +164,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -164,7 +192,7 @@ size_flags_vertical = 1
 light_mask = 0
 position = Vector2( 20, 20 )
 scale = Vector2( 0.625, 0.625 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Resources"]
 light_mask = 0
@@ -181,7 +209,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -209,7 +237,7 @@ size_flags_vertical = 1
 light_mask = 0
 position = Vector2( 20, 20 )
 scale = Vector2( 0.625, 0.625 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Gold"]
 light_mask = 0
@@ -226,7 +254,31 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Text" type="Label" parent="UI/TopMenu"]
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_top = 44.0
+margin_right = 523.0
+margin_bottom = 76.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 4 )
+text = "Food                              People                          Resources                 Gold"
+align = 1
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -236,7 +288,7 @@ max_lines_visible = -1
 position = Vector2( 627, 683 )
 enabled = true
 editor_only = false
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 offset = Vector2( 0, 0 )
 texture_scale = 15.0
 color = Color( 1, 1, 1, 1 )
@@ -260,7 +312,7 @@ shadow_item_cull_mask = 1
 position = Vector2( 661, 259 )
 enabled = true
 editor_only = false
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 offset = Vector2( 0, 0 )
 texture_scale = 15.0
 color = Color( 1, 1, 1, 1 )
@@ -333,7 +385,7 @@ color = Color( 0, 0.858824, 1, 1 )
 [node name="Demon" type="Sprite" parent="."]
 position = Vector2( 643, 295 )
 scale = Vector2( 2.76563, 1.84375 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="Ground" type="ColorRect" parent="."]
 anchor_left = 0.0
@@ -369,6 +421,9 @@ shape = SubResource( 1 )
 [node name="WidgetPivot" type="Position2D" parent="Village"]
 position = Vector2( -76.2837, 69.7589 )
 
+[node name="Sprite" type="Sprite" parent="Village"]
+texture = ExtResource( 3 )
+
 [node name="Castle" type="Area2D" parent="."]
 editor/display_folded = true
 position = Vector2( 633, 441 )
@@ -386,8 +441,10 @@ shape = SubResource( 1 )
 [node name="WidgetPivot" type="Position2D" parent="Castle"]
 position = Vector2( -76.2837, 69.7589 )
 
+[node name="Sprite" type="Sprite" parent="Castle"]
+texture = ExtResource( 3 )
+
 [node name="Factory" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 303, 583 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -402,6 +459,9 @@ shape = SubResource( 1 )
 
 [node name="WidgetPivot" type="Position2D" parent="Factory"]
 position = Vector2( -76.2837, 69.7589 )
+
+[node name="Sprite" type="Sprite" parent="Factory"]
+texture = ExtResource( 3 )
 
 [node name="Granary" type="Area2D" parent="."]
 editor/display_folded = true
@@ -419,6 +479,9 @@ shape = SubResource( 1 )
 
 [node name="WidgetPivot" type="Position2D" parent="Granary"]
 position = Vector2( -76.2837, 69.7589 )
+
+[node name="Sprite" type="Sprite" parent="Granary"]
+texture = ExtResource( 3 )
 
 [node name="Dungeon" type="Area2D" parent="."]
 editor/display_folded = true
@@ -453,39 +516,17 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 align = 1
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="w" type="Label" parent="."]
-light_mask = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 1.0
-margin_top = 44.0
-margin_right = 153.0
-margin_bottom = 76.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = ExtResource( 3 )
-text = "Food                              People                          Resources                 Gold"
-align = 1
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[connection signal="timeout" from="Timers/ResourceTick" to="." method="_on_ResourceTick_timeout"]
 [connection signal="timeout" from="Timers/ReduceTick" to="." method="_on_ReduceTick_timeout"]
+[connection signal="timeout" from="Timers/FactoryTick" to="." method="_on_FactoryTick_timeout"]
+[connection signal="timeout" from="Timers/GranaryTick" to="." method="_on_GranaryTick_timeout"]
+[connection signal="timeout" from="Timers/VillageTick" to="." method="_on_Villagetick_timeout"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="input_event" from="Village" to="." method="_on_Building_input_event" binds= [ "Village" ]]
 [connection signal="mouse_entered" from="Village" to="." method="_on_Building_mouse_entered" binds= [ "Village" ]]

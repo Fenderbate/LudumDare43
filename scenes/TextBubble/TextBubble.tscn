@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/TextBubble/TextBubble.gd" type="Script" id=1]
+[ext_resource path="res://misc/Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://audio/sound/talk1.wav" type="AudioStream" id=3]
+
+[node name="TextBubble" type="Node2D"]
+position = Vector2( 263, 233 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="Tall" type="Label" parent="."]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -108.0
+margin_top = -210.0
+margin_right = 109.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Wide" type="Label" parent="."]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -232.0
+margin_top = -140.0
+margin_right = 233.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+text = "My lord! This label is wide! It can fit a reaaaaaaaaaaaaaaaaaly long
+line of text! Like, A reeeeeeeeeealy long one!"
+align = 1
+valign = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="Players" type="Node" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
