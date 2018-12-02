@@ -1,10 +1,18 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://misc/Font.tres" type="DynamicFont" id=4]
-[ext_resource path="res://art/dark.png" type="Texture" id=5]
+[ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=5]
+[ext_resource path="res://art/dark.png" type="Texture" id=6]
+[ext_resource path="res://art/Village.png" type="Texture" id=7]
+
+[sub_resource type="CapsuleShape2D" id=2]
+
+custom_solver_bias = 0.0
+radius = 89.0
+height = 106.422
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -104,7 +112,6 @@ one_shot = true
 autostart = false
 
 [node name="UI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -594,11 +601,47 @@ playback/active = false
 playback/repeat = false
 playback/speed = 1.0
 
+[node name="Lost" type="TextureRect" parent="UI"]
+pause_mode = 2
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+expand = true
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="UI/Lost"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "All your people died.
+Your kingdom has fallen."
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Dark" type="Light2D" parent="."]
 position = Vector2( 643, 693 )
 enabled = true
 editor_only = false
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 offset = Vector2( 0, 0 )
 texture_scale = 15.0
 color = Color( 1, 1, 1, 1 )
@@ -702,13 +745,15 @@ audio_bus_override = false
 audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village"]
-shape = SubResource( 1 )
+position = Vector2( -12, 19 )
+rotation = 1.61301
+shape = SubResource( 2 )
 
 [node name="WidgetPivot" type="Position2D" parent="Village"]
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Village"]
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 
 [node name="Castle" type="Area2D" parent="."]
 editor/display_folded = true

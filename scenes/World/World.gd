@@ -92,7 +92,9 @@ func set_menu_info_nopar():
 		no_gold = false
 	
 	if Global.people <= 0 and !no_people:
-		print("implement losing")
+		get_tree().paused = true
+		$UI/Lost.show()
+		print("implement losing animation")
 	
 	if Global.resources <= 0 and !no_resources:
 		text_bubble($Factory,"We ran out of resources my Lord!")
@@ -106,6 +108,7 @@ func set_menu_info_nopar():
 		no_food = true
 	elif Global.food > 0 and no_food:
 		text_bubble($Granary,"Finally we can eat again! Thank you my Lord!")
+		no_food = false
 
 func text_bubble(target,text):
 	
@@ -248,29 +251,22 @@ func _on_Tween_tween_completed(object, key):
 			print(object.name)
 
 
-func _on_Village_area_entered(area):
-	match area.type:
-		area.types.PEOPLE:
-			print("people")
-		1:
-			pass
-		2:
-			pass
-		3:
-			pass
-
-
-
 func _on_FactoryTick_timeout():
+	if Global.food <= 0 and Global.gold <= 0:
+		return
 	Global.resources += resrate
 	spawn_floater($Factory.position,str("Resources +",resrate))
 
 
 func _on_GranaryTick_timeout():
+	if Global.gold <= 0:
+		return
 	Global.food += foodrate
 	spawn_floater($Granary.position,str("Food +",foodrate))
 
 func _on_Villagetick_timeout():
+	if Global.food <= 0 and Global.gold <= 0:
+		return
 	Global.people += pplrate
 	spawn_floater($Village.position,str("Poeple +",pplrate))
 
