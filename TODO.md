@@ -12,7 +12,7 @@ graphics:
   **Icons**
   - [ ] Resources
   - [ ] People
-  - [ ] Gold
+  - [x] Gold
   - [ ] Food
   - [ ] Arrow
   
