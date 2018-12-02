@@ -13,6 +13,11 @@ var factory_tick_max = 2.0
 var granary_tick_max = 1.0
 var village_tick_max = 3.0
 
+var no_people = false
+var no_gold = false
+var no_resources = false
+var no_food = false
+
 func set_foodrate(value):
 	foodrate = value
 
@@ -30,7 +35,7 @@ func _ready():
 	
 	
 	
-	set_menu_info(Global.food,Global.people,Global.resources,Global.gold)
+	set_menu_info_nopar()
 	
 	$Timers/FactoryTick.wait_time = factory_tick_max
 	$Timers/VillageTick.wait_time = village_tick_max
@@ -43,7 +48,7 @@ func _ready():
 	$Tween.start()
 	$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
-	$Tween.interpolate_property($Sun,"energy",$Sun.energy,0.25,5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
 	
 
@@ -73,17 +78,45 @@ func spawn_floater(start_position,text,icon = null):
 	add_child(f)
 	
 
-func set_menu_info(_food,_people,_resources,_gold):
-	$UI/TopMenu/Food/Value.text = str(_food)
-	$UI/TopMenu/People/Value.text = str(_people)
-	$UI/TopMenu/Resources/Value.text = str(_resources)
-	$UI/TopMenu/Gold/Value.text = str(_gold)
-
 func set_menu_info_nopar():
 	$UI/TopMenu/Food/Value.text = str(Global.food)
 	$UI/TopMenu/People/Value.text = str(Global.people)
 	$UI/TopMenu/Resources/Value.text = str(Global.resources)
 	$UI/TopMenu/Gold/Value.text = str(Global.gold)
+	
+	if Global.gold <= 0 and !no_gold:
+		text_bubble($Castle,"My Lord! We have no gold left!")
+		no_gold = true
+	elif Global.gold > 0 and no_gold:
+		text_bubble($Castle,"My Lord! We have gold again!!")
+		no_gold = false
+	
+	if Global.people <= 0 and !no_people:
+		print("implement losing")
+	
+	if Global.resources <= 0 and !no_resources:
+		text_bubble($Factory,"We ran out of resources my Lord!")
+		no_resources = true
+	elif Global.resources > 0 and no_resources:
+		text_bubble($Factory,"We managed to get some resources my Lord!")
+		no_resources = false
+	
+	if Global.food <= 0 and !no_food:
+		text_bubble($Granary,"My Lord! The people are hungry, we need food!")
+		no_food = true
+	elif Global.food > 0 and no_food:
+		text_bubble($Granary,"Finally we can eat again! Thank you my Lord!")
+
+func text_bubble(target,text):
+	
+	for child in target.get_children():
+		if child.name.find("TextBubble") != -1:
+			child.queue_free()
+	
+	var b = Global.bubble.instance()
+	b.position = Vector2(0,0)
+	b.target_text = text
+	target.add_child(b)
 
 func animate(sprite):
 	var ap = AnimationPlayer.new()
@@ -107,6 +140,11 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 				if $Timers/FactoryTick.wait_time > factory_tick_max / 2:
 					$Timers/FactoryTick.wait_time -= $Timers/FactoryTick.wait_time * click_reduce
 					animate($Factory/Sprite.get_path())
+					
+					if $Timers/ClickedTimers/FactoryTimer.time_left <= 0:
+						text_bubble($Factory,Global.click_response_generic[randi() % Global.click_response_generic.size()])
+						$Timers/ClickedTimers/FactoryTimer.start()
+					
 				return
 				Global.food -= Global.factory_needs.Food
 				Global.people -= Global.factory_needs.People
@@ -115,6 +153,11 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 				if $Timers/GranaryTick.wait_time > granary_tick_max / 2:
 					$Timers/GranaryTick.wait_time -= $Timers/GranaryTick.wait_time * click_reduce
 					animate($Granary/Sprite.get_path())
+					
+					if $Timers/ClickedTimers/GranaryTimer.time_left <= 0:
+						text_bubble($Granary,Global.click_response_generic[randi() % Global.click_response_generic.size()])
+						$Timers/ClickedTimers/GranaryTimer.start()
+				
 				return
 				Global.resources -= Global.granary_needs.Resources
 				Global.people -= Global.granary_needs.People
@@ -123,6 +166,10 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 				if $Timers/VillageTick.wait_time > village_tick_max / 2:
 					$Timers/VillageTick.wait_time -= $Timers/VillageTick.wait_time * click_reduce
 					animate($Village/Sprite.get_path())
+					
+					if $Timers/ClickedTimers/VillageTimer.time_left <= 0:
+						text_bubble($Village,Global.village_response[randi() % Global.village_response.size()])
+						$Timers/ClickedTimers/VillageTimer.start()
 				return
 				Global.resources -= Global.village_needs.Resources
 				Global.food -= Global.village_needs.Food
@@ -140,24 +187,21 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 func _on_Building_mouse_entered(building_name):
 	match building_name:
 		"Granary":
-			info_text("Granary - Cost: 50",$Granary.position + Vector2(0,-50))
+			info_text("Granary",$Granary.position + Vector2(0,-50))
 		"Factory":
-			info_text("Factory - Cost: 50",$Factory.position + Vector2(0,-50))
-		"Barn":
-			info_text("Castle - Gold +10",$Castle.position + Vector2(0,-50))
+			info_text("Factory",$Factory.position + Vector2(0,-50))
+		"Castle":
+			info_text("Castle",$Castle.position + Vector2(0,-50))
 		"Village":
-			info_text("Village - Cost: 50",$Village.position + Vector2(0,-50))
+			info_text("Village",$Village.position + Vector2(0,-50))
 		"Dungeon":
-			info_text("Dungeon - Cost: 50",$Dungeon.position + Vector2(0,-50))
+			info_text("Dungeon",$Dungeon.position + Vector2(0,-50))
 		_:
 			print(building_name)
 
 
 func _on_Building_mouse_exited():
 	$Info.text = ""
-
-
-
 
 func _on_ReduceTick_timeout():
 	
@@ -180,12 +224,12 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.start()
 				$Tween.interpolate_property($Sky,"color",$Sky.color,Color("00dbff"),0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				$Tween.interpolate_property($Sun,"energy",$Sun.energy,1,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				Global.food -= 25
-				Global.people -= 12.5
-				Global.resources -= 50
-				Global.gold -= 250
+				Global.food -= Global.food * 0.25 if Global.food > 35 else 15
+				Global.people -= Global.people * 0.25 if Global.people > 15 else 5
+				Global.resources -= Global.resources * 0.25 if Global.resources > 35 else 20
+				Global.gold -= Global.gold * 0.25 if Global.gold > 400 else 100
 				set_menu_info_nopar()
 				up = true
 			else:
@@ -193,7 +237,7 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.start()
 				$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				$Tween.interpolate_property($Sun,"energy",$Sun.energy,0.25,5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
 				up = false
 
@@ -223,3 +267,35 @@ func _on_GranaryTick_timeout():
 func _on_Villagetick_timeout():
 	Global.people += pplrate
 	spawn_floater($Village.position,str("Poeple +",pplrate))
+
+
+func _on_AnimPlayerRemover_timeout():
+	if $AnimPlayers.get_child_count() > 0:
+		$AnimPlayers.get_children()[0].queue_free()
+
+var bot_menu_up = false
+
+func _on_PopupButton_button_down():
+	if !bot_menu_up:
+		$Tween.interpolate_property(
+		$UI/BotMenu,"rect_position",
+		$UI/BotMenu.rect_position,
+		Vector2(0,420),
+		2,
+		Tween.TRANS_EXPO,
+		Tween.EASE_OUT
+		)
+		$UI/BotMenu/PopupButton/Arrow.scale.y = -1
+		bot_menu_up = true
+	else:
+		$Tween.interpolate_property(
+		$UI/BotMenu,"rect_position",
+		$UI/BotMenu.rect_position,
+		Vector2(0,720),
+		1,
+		Tween.TRANS_BOUNCE,
+		Tween.EASE_OUT
+		)
+		$UI/BotMenu/PopupButton/Arrow.scale.y = 1
+		bot_menu_up = false
+	$Tween.start()

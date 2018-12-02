@@ -14,3 +14,4 @@ graphics:
   - [ ] People
   - [ ] Gold
   - [ ] Food
+  - [ ] Arrow

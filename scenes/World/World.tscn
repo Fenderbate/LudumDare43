@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://misc/Font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://art/dark.png" type="Texture" id=5]
-[ext_resource path="res://art/cover_light.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -27,6 +26,13 @@ blend_times = [  ]
 [node name="AnimPlayers" type="Node" parent="."]
 
 [node name="Timers" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="AnimPlayerRemover" type="Timer" parent="Timers"]
+process_mode = 1
+wait_time = 0.25
+one_shot = false
+autostart = true
 
 [node name="ResourceTick" type="Timer" parent="Timers"]
 process_mode = 1
@@ -58,6 +64,38 @@ wait_time = 3.0
 one_shot = false
 autostart = false
 
+[node name="ClickedTimers" type="Node" parent="Timers"]
+
+[node name="VillageTimer" type="Timer" parent="Timers/ClickedTimers"]
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = false
+
+[node name="GranaryTimer" type="Timer" parent="Timers/ClickedTimers"]
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = false
+
+[node name="FactoryTimer" type="Timer" parent="Timers/ClickedTimers"]
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = false
+
+[node name="Dungeon" type="Timer" parent="Timers/ClickedTimers"]
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = false
+
+[node name="CastleTimer" type="Timer" parent="Timers/ClickedTimers"]
+process_mode = 1
+wait_time = 10.0
+one_shot = true
+autostart = false
+
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 1
 offset = Vector2( 0, 0 )
@@ -65,7 +103,7 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="TopMenu" type="TextureRect" parent="UI"]
+[node name="TopMenu" type="ColorRect" parent="UI"]
 editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
@@ -75,11 +113,11 @@ anchor_bottom = 0.0
 rect_min_size = Vector2( 0, 50 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-stretch_mode = 2
+color = Color( 0.211765, 0.164706, 0.117647, 1 )
 
 [node name="Food" type="Control" parent="UI/TopMenu"]
 editor/display_folded = true
@@ -284,46 +322,227 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="BotMenu" type="ColorRect" parent="UI"]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 0, 300 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.211765, 0.164706, 0.117647, 1 )
+
+[node name="PopupButton" type="TextureButton" parent="UI/BotMenu"]
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = -61.0
+margin_right = 130.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="Label" type="Label" parent="UI/BotMenu/PopupButton"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.0
+margin_top = -20.0
+margin_right = -85.0
+margin_bottom = -49.0
+rect_scale = Vector2( 3, 3 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 4 )
+text = "Gods"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Arrow" type="Sprite" parent="UI/BotMenu/PopupButton"]
+position = Vector2( 166, 28 )
+texture = ExtResource( 3 )
+
+[node name="Kaja" type="TextureButton" parent="UI/BotMenu"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 65.0
+margin_top = 4.0
+margin_right = 215.0
+margin_bottom = 154.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 3 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/BotMenu/Kaja"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 3.0
+margin_top = 149.0
+margin_right = 145.0
+margin_bottom = 254.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 4 )
+text = "Kaja
+Gold -200
+Food + 100"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Anyag" type="TextureButton" parent="UI/BotMenu"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 402.0
+margin_top = 4.0
+margin_right = 552.0
+margin_bottom = 154.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 3 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/BotMenu/Anyag"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -3.0
+margin_top = 148.0
+margin_right = 157.0
+margin_bottom = 257.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 4 )
+text = "Anyag
+Gold -200
+Resources + 100"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Ember" type="TextureButton" parent="UI/BotMenu"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 729.0
+margin_top = 1.0
+margin_right = 879.0
+margin_bottom = 151.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 3 )
+expand = true
+
+[node name="Label" type="Label" parent="UI/BotMenu/Ember"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 2.0
+margin_top = 148.0
+margin_right = 146.0
+margin_bottom = 253.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 4 )
+text = "Ember
+Gold -200
+People + 50"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Dark" type="Light2D" parent="."]
-position = Vector2( 627, 683 )
+position = Vector2( 643, 693 )
 enabled = true
 editor_only = false
 texture = ExtResource( 5 )
 offset = Vector2( 0, 0 )
 texture_scale = 15.0
 color = Color( 1, 1, 1, 1 )
-energy = 1.0
-mode = 3
+energy = 0.01
+mode = 2
 range_height = 0.0
 range_z_min = -1024
 range_z_max = 1024
 range_layer_min = 0
 range_layer_max = 0
 range_item_cull_mask = 1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
-shadow_gradient_length = 0.0
-shadow_filter = 0
-shadow_filter_smooth = 0.0
-shadow_item_cull_mask = 1
-
-[node name="Sun" type="Light2D" parent="."]
-position = Vector2( 661, 259 )
-enabled = true
-editor_only = false
-texture = ExtResource( 6 )
-offset = Vector2( 0, 0 )
-texture_scale = 15.0
-color = Color( 1, 1, 1, 1 )
-energy = 1.0
-mode = 3
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 3
 shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 0 )
 shadow_buffer_size = 2048
@@ -393,9 +612,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = -118.0
-margin_top = 223.0
+margin_top = 222.0
 margin_right = 1410.0
-margin_bottom = 793.0
+margin_bottom = 792.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -445,6 +664,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 3 )
 
 [node name="Factory" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 303, 583 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -523,16 +743,18 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[connection signal="timeout" from="Timers/AnimPlayerRemover" to="." method="_on_AnimPlayerRemover_timeout"]
 [connection signal="timeout" from="Timers/ReduceTick" to="." method="_on_ReduceTick_timeout"]
 [connection signal="timeout" from="Timers/FactoryTick" to="." method="_on_FactoryTick_timeout"]
 [connection signal="timeout" from="Timers/GranaryTick" to="." method="_on_GranaryTick_timeout"]
 [connection signal="timeout" from="Timers/VillageTick" to="." method="_on_Villagetick_timeout"]
+[connection signal="button_down" from="UI/BotMenu/PopupButton" to="." method="_on_PopupButton_button_down"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="input_event" from="Village" to="." method="_on_Building_input_event" binds= [ "Village" ]]
 [connection signal="mouse_entered" from="Village" to="." method="_on_Building_mouse_entered" binds= [ "Village" ]]
 [connection signal="mouse_exited" from="Village" to="." method="_on_Building_mouse_exited"]
 [connection signal="input_event" from="Castle" to="." method="_on_Building_input_event" binds= [ "Castle" ]]
-[connection signal="mouse_entered" from="Castle" to="." method="_on_Building_mouse_entered" binds= [ "Barn" ]]
+[connection signal="mouse_entered" from="Castle" to="." method="_on_Building_mouse_entered" binds= [ "Castle" ]]
 [connection signal="mouse_exited" from="Castle" to="." method="_on_Building_mouse_exited"]
 [connection signal="input_event" from="Factory" to="." method="_on_Building_input_event" binds= [ "Factory" ]]
 [connection signal="mouse_entered" from="Factory" to="." method="_on_Building_mouse_entered" binds= [ "Factory" ]]

@@ -5,7 +5,7 @@ var font = preload("res://misc/Font.tres")
 
 #nodes
 var floater = preload("res://scenes/FloatInfo/FloatInfo.tscn")
-
+var bubble = preload("res://scenes/TextBubble/TextBubble.tscn")
 
 #animations
 var boop_animation = preload("res://animatons/Boop.tres")
@@ -16,6 +16,19 @@ var talk =[
 preload("res://audio/sound/talk1.wav"),
 preload("res://audio/sound/talk2.wav"),
 preload("res://audio/sound/talk_3.wav")
+]
+
+#dialogs
+var click_response_generic = [
+"We're working as fast as we can my Lord!",
+"Faster?!? But my Lord I'm tireeeed!",
+"Right away Sir!"
+]
+var village_response = [
+"We're lovin' as fast as we can!",
+"But I already have 15 children!",
+"We're gettin' another bed!"
+
 ]
 
 var food = 100
