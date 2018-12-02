@@ -10,7 +10,7 @@ graphics:
   - [ ] Wide Text Bubble
   
   **Icons**
-  - [ ] Resources
+  - [x] Resources
   - [ ] People
   - [x] Gold
   - [ ] Food
