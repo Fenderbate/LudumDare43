@@ -13,7 +13,7 @@ graphics:
   - [x] Resources
   - [ ] People
   - [x] Gold
-  - [ ] Food
+  - [x] Food
   - [ ] Arrow
   
   **Portraits**
