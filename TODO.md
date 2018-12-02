@@ -1,6 +1,6 @@
 graphics:
   **Buildings**
-  - [ ] Village
+  - [x] Village
   - [ ] Granary
   - [ ] Factory
   - [ ] Dungeon
