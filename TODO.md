@@ -12,10 +12,10 @@ graphics:
   
   **Icons**
   - [x] Resources
-  - [ ] People
+  - [x] People
   - [x] Gold
   - [x] Food
-  - [x] Arrow
+  - [] Arrow
   
   **Portraits**
   
