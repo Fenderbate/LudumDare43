@@ -9,10 +9,10 @@ var up = false
 
 var click_reduce = 0.05
 
-var factory_tick_max = 2.0
-var granary_tick_max = 1.0
-var village_tick_max = 3.0
-var castle_tick_max = 2.0
+var factory_tick_max = 1.5
+var granary_tick_max = 0.5
+var village_tick_max = 2.5
+var castle_tick_max = 1.5
 
 var no_people = false
 var no_gold = false
@@ -65,8 +65,19 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		$Camera.position += event.relative/20
 
-func _draw():
-	pass
+
+func win():
+	
+	get_tree().paused = true
+	$UI/Won.show()
+	print("make victory animation!")
+
+func lost():
+	
+	get_tree().paused = true
+	$UI/Lost.show()
+	print("implement losing animation!")
+
 	
 func info_text(text,position):
 	
@@ -101,9 +112,7 @@ func set_menu_info():
 		no_gold = false
 	
 	if Global.people <= 0 and !no_people:
-		get_tree().paused = true
-		$UI/Lost.show()
-		print("implement losing animation")
+		lost()
 	
 	if Global.resources <= 0 and !no_resources:
 		text_bubble($Factory,"We ran out of resources my Lord!")
@@ -260,6 +269,9 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 				
 				animate($Dungeon/Sprite.get_path())
 				
+				if Global.dungeon_gold == 0:
+					win()
+				
 			_:
 				print("oops... ",building_name)
 
@@ -307,10 +319,10 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.start()
 				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				Global.food -= round(Global.food * 0.5) if Global.food > 50 else 30
-				Global.people -= round(Global.people * 0.5) if Global.people > 20 else 12
-				Global.resources -= round(Global.resources * 0.5) if Global.resources > 50 else 30
-				Global.gold -= round(Global.gold * 0.5) if Global.gold > 400 else 225
+				Global.food -= round(Global.food * 0.25) if Global.food > 50 else 30
+				Global.people -= round(Global.people * 0.3) if Global.people > 20 else 12
+				Global.resources -= round(Global.resources * 0.25) if Global.resources > 50 else 30
+				Global.gold -= round(Global.gold * 0.3) if Global.gold > 400 else 225
 				set_menu_info()
 				up = true
 			else:

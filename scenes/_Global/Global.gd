@@ -53,13 +53,13 @@ var gold = 1000
 
 var dungeon_food = 500
 var dungeon_resources = 500
-var dungeon_people = 500
+var dungeon_people = 250
 var dungeon_gold = 5000
 
-var d_food_remove = 50
-var d_resources_remove = 50
+var d_food_remove = 100
+var d_resources_remove = 100
 var d_people_remove = 50
-var d_gold_remove = 500
+var d_gold_remove = 1000
 
 var god_food_blessing = 50
 var god_resources_blessing = 50
