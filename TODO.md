@@ -7,7 +7,7 @@ graphics:
   - [x] Castle
   
   **Misc**
-  - [ ] Demon
+  - [x] Demon
   - [ ] Wide Text Bubble
   
   **Icons**
