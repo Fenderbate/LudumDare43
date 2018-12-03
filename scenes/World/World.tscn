@@ -60,7 +60,6 @@ blend_times = [  ]
 [node name="AnimPlayers" type="Node" parent="."]
 
 [node name="Timers" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="GodTimer" type="Timer" parent="Timers"]
 process_mode = 1
@@ -1184,6 +1183,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 17 )
 
 [node name="Dungeon" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 996, 592 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )

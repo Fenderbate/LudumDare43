@@ -7,7 +7,7 @@ var goldrate = 25.0 setget set_goldrate
 
 var up = false
 
-var click_reduce = 0.05
+var click_reduce = 0.025
 
 var factory_tick_max = 1.5
 var granary_tick_max = 0.5
@@ -188,7 +188,7 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 #				animate($Castle/Sprite.get_path())
 #				animate_icon($UI/TopMenu/Gold/Icon.get_path())
 				if $Timers/CastleTick.wait_time > castle_tick_max / 4:
-					$Timers/CastleTick.wait_time -= $Timers/CastleTick.wait_time * click_reduce * 2
+					$Timers/CastleTick.wait_time -= $Timers/CastleTick.wait_time * click_reduce * 4
 					animate($Castle/Sprite.get_path())
 					
 					if $Timers/ClickedTimers/CastleTimer.time_left <= 0:
@@ -198,7 +198,7 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 			
 			"Factory":
 				if $Timers/FactoryTick.wait_time > factory_tick_max / 2:
-					$Timers/FactoryTick.wait_time -= $Timers/FactoryTick.wait_time * click_reduce
+					$Timers/FactoryTick.wait_time -= $Timers/FactoryTick.wait_time * click_reduce * 2
 					animate($Factory/Sprite.get_path())
 					
 					if $Timers/ClickedTimers/FactoryTimer.time_left <= 0:
@@ -211,7 +211,7 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 				Global.gold -= Global.factory_needs.Gold
 			"Granary":
 				if $Timers/GranaryTick.wait_time > granary_tick_max / 2:
-					$Timers/GranaryTick.wait_time -= $Timers/GranaryTick.wait_time * click_reduce
+					$Timers/GranaryTick.wait_time -= $Timers/GranaryTick.wait_time * click_reduce * 2
 					animate($Granary/Sprite.get_path())
 					
 					if $Timers/ClickedTimers/GranaryTimer.time_left <= 0:
@@ -224,7 +224,7 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 				Global.gold -= Global.granary_needs.Gold
 			"Village":
 				if $Timers/VillageTick.wait_time > village_tick_max / 2:
-					$Timers/VillageTick.wait_time -= $Timers/VillageTick.wait_time * click_reduce
+					$Timers/VillageTick.wait_time -= $Timers/VillageTick.wait_time * click_reduce * 2
 					animate($Village/Sprite.get_path())
 					
 					if $Timers/ClickedTimers/VillageTimer.time_left <= 0:
@@ -319,10 +319,10 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.start()
 				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				Global.food -= round(Global.food * 0.25) if Global.food > 50 else 30
-				Global.people -= round(Global.people * 0.3) if Global.people > 20 else 12
-				Global.resources -= round(Global.resources * 0.25) if Global.resources > 50 else 30
-				Global.gold -= round(Global.gold * 0.3) if Global.gold > 400 else 225
+				Global.food -= round(Global.food * 0.2) if Global.food > 50 else 30
+				Global.people -= round(Global.people * 0.25) if Global.people > 20 else 12
+				Global.resources -= round(Global.resources * 0.2) if Global.resources > 50 else 30
+				Global.gold -= round(Global.gold * 0.25) if Global.gold > 400 else 225
 				set_menu_info()
 				up = true
 			else:
