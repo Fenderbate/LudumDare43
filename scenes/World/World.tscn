@@ -58,6 +58,7 @@ blend_times = [  ]
 [node name="AnimPlayers" type="Node" parent="."]
 
 [node name="Timers" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="GodTimer" type="Timer" parent="Timers"]
 process_mode = 1
@@ -821,7 +822,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 1, 0.486275, 1 )
+color = Color( 0.317647, 0.392157, 0.266667, 1 )
 
 [node name="Village" type="Area2D" parent="."]
 editor/display_folded = true
@@ -846,6 +847,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 14 )
 
 [node name="Castle" type="Area2D" parent="."]
+editor/display_folded = true
 position = Vector2( 633, 441 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )

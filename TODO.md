@@ -28,3 +28,7 @@ graphics:
   - [ ] Button
   - [ ] UI backround
   - [ ] UI border
+
+  **Other**
+  - [ ] Cloud 1
+  - [ ] Cloud 2

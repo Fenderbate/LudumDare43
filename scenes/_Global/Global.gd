@@ -14,9 +14,14 @@ var icon_boop_animation = preload("res://animatons/IconBoop.tres")
 #sounds
 
 var talk =[
-preload("res://audio/sound/talk1.wav"),
-preload("res://audio/sound/talk2.wav"),
-preload("res://audio/sound/talk_3.wav")
+preload("res://audio/sound/talking/talk1.ogg"),
+preload("res://audio/sound/talking/talk2.ogg"),
+preload("res://audio/sound/talking/talk3.ogg"),
+preload("res://audio/sound/talking/talk4.ogg"),
+preload("res://audio/sound/talking/talk5.ogg"),
+preload("res://audio/sound/talking/talk6.ogg"),
+preload("res://audio/sound/talking/talk7.ogg"),
+preload("res://audio/sound/talking/talk8.ogg")
 ]
 
 #dialogs

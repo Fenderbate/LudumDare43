@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/talk8.ogg-50a5c6edfe28a0c6deab0a6f83ecffa7.oggstr"
+
+[deps]
+
+source_file="res://audio/sound/talking/talk8.ogg"
+dest_files=[ "res://.import/talk8.ogg-50a5c6edfe28a0c6deab0a6f83ecffa7.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

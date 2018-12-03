@@ -22,7 +22,7 @@ func _on_Timer_timeout():
 		if index < target_text.length() - 1 and index % 1 == 0 and target_text[index] != " ":
 			var p = AudioStreamPlayer.new()
 			p.stream = Global.talk[randi() % Global.talk.size()]
-			p.pitch_scale = rand_range(0.75,1.25)
+			p.pitch_scale = rand_range(0.85,1.15)
 			p.volume_db = -10
 			$Players.add_child(p)
 			p.play()
