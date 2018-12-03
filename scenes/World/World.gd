@@ -52,6 +52,10 @@ func _ready():
 	$Tween.start()
 	$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
+#	$Tween.interpolate_property($Music,"pitch_scale",1,0.9,20,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+#	$Tween.start()
+	$Tween.interpolate_property($Rumble,"volume_db",-50,-10,20,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+	$Tween.start()
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -319,6 +323,10 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.start()
 				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
+#				$Tween.interpolate_property($Music,"pitch_scale",0.9,1,0.5,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+#				$Tween.start()
+				$Tween.interpolate_property($Rumble,"volume_db",-10,-50,0.5,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+				$Tween.start()
 				Global.food -= round(Global.food * 0.2) if Global.food > 50 else 30
 				Global.people -= round(Global.people * 0.25) if Global.people > 20 else 12
 				Global.resources -= round(Global.resources * 0.2) if Global.resources > 50 else 30
@@ -331,6 +339,10 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
 				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+				$Tween.start()
+#				$Tween.interpolate_property($Music,"pitch_scale",1,0.9,20,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+#				$Tween.start()
+				$Tween.interpolate_property($Rumble,"volume_db",-50,-10,20,Tween.TRANS_LINEAR,Tween.EASE_OUT)
 				$Tween.start()
 				up = false
 		"BotMenu":
