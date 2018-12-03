@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
@@ -14,19 +14,18 @@
 [ext_resource path="res://art/Good_arrow.png" type="Texture" id=12]
 [ext_resource path="res://art/button_dark.png" type="Texture" id=13]
 [ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=14]
-[ext_resource path="res://art/dark.png" type="Texture" id=15]
-[ext_resource path="res://art/Cloud1.png" type="Texture" id=16]
-[ext_resource path="res://art/Cloud2.png" type="Texture" id=17]
-[ext_resource path="res://art/Demon.png" type="Texture" id=18]
-[ext_resource path="res://art/Map.png" type="Texture" id=19]
-[ext_resource path="res://art/Village.png" type="Texture" id=20]
-[ext_resource path="res://art/Castle.png" type="Texture" id=21]
-[ext_resource path="res://art/Factory.png" type="Texture" id=22]
-[ext_resource path="res://art/Granary.png" type="Texture" id=23]
-[ext_resource path="res://art/Dungeon.png" type="Texture" id=24]
-[ext_resource path="res://audio/music/BG_Music.wav" type="AudioStream" id=25]
-[ext_resource path="res://audio/sound/rumble.wav" type="AudioStream" id=26]
-[ext_resource path="res://audio/sound/strike.ogg" type="AudioStream" id=27]
+[ext_resource path="res://art/Cloud1.png" type="Texture" id=15]
+[ext_resource path="res://art/Cloud2.png" type="Texture" id=16]
+[ext_resource path="res://art/Demon.png" type="Texture" id=17]
+[ext_resource path="res://art/Map.png" type="Texture" id=18]
+[ext_resource path="res://art/Village.png" type="Texture" id=19]
+[ext_resource path="res://art/Castle.png" type="Texture" id=20]
+[ext_resource path="res://art/Factory.png" type="Texture" id=21]
+[ext_resource path="res://art/Granary.png" type="Texture" id=22]
+[ext_resource path="res://art/Dungeon.png" type="Texture" id=23]
+[ext_resource path="res://audio/music/BG_Music.wav" type="AudioStream" id=24]
+[ext_resource path="res://audio/sound/rumble.wav" type="AudioStream" id=25]
+[ext_resource path="res://audio/sound/strike.ogg" type="AudioStream" id=26]
 
 [sub_resource type="Gradient" id=1]
 
@@ -1953,31 +1952,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Dark" type="Light2D" parent="."]
-pause_mode = 1
-position = Vector2( 643, 693 )
-enabled = true
-editor_only = false
-texture = ExtResource( 15 )
-offset = Vector2( 0, 0 )
-texture_scale = 15.0
-color = Color( 1, 1, 1, 1 )
-energy = 0.01
-mode = 2
-range_height = 0.0
-range_z_min = -1024
-range_z_max = 1024
-range_layer_min = 0
-range_layer_max = 0
-range_item_cull_mask = 1
-shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 0 )
-shadow_buffer_size = 2048
-shadow_gradient_length = 0.0
-shadow_filter = 0
-shadow_filter_smooth = 0.0
-shadow_item_cull_mask = 1
-
 [node name="Tween" type="Tween" parent="."]
 pause_mode = 1
 repeat = false
@@ -2049,7 +2023,7 @@ visibility_rect = Rect2( -500, -200, 1000, 400 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 3 )
-texture = ExtResource( 16 )
+texture = ExtResource( 15 )
 normal_map = null
 h_frames = 1
 v_frames = 1
@@ -2071,7 +2045,7 @@ visibility_rect = Rect2( -500, -200, 1000, 400 )
 local_coords = false
 draw_order = 0
 process_material = SubResource( 3 )
-texture = ExtResource( 17 )
+texture = ExtResource( 16 )
 normal_map = null
 h_frames = 1
 v_frames = 1
@@ -2079,7 +2053,7 @@ v_frames = 1
 [node name="Demon" type="Sprite" parent="."]
 pause_mode = 1
 position = Vector2( 643, 330 )
-texture = ExtResource( 18 )
+texture = ExtResource( 17 )
 
 [node name="Ground" type="TextureRect" parent="."]
 pause_mode = 1
@@ -2097,7 +2071,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 19 )
+texture = ExtResource( 18 )
 stretch_mode = 4
 
 [node name="Village" type="Area2D" parent="."]
@@ -2121,7 +2095,7 @@ shape = SubResource( 4 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Village"]
-texture = ExtResource( 20 )
+texture = ExtResource( 19 )
 
 [node name="Castle" type="Area2D" parent="."]
 pause_mode = 1
@@ -2142,7 +2116,7 @@ shape = SubResource( 5 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Castle"]
-texture = ExtResource( 21 )
+texture = ExtResource( 20 )
 
 [node name="Factory" type="Area2D" parent="."]
 pause_mode = 1
@@ -2164,7 +2138,7 @@ shape = SubResource( 6 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Factory"]
-texture = ExtResource( 22 )
+texture = ExtResource( 21 )
 
 [node name="Granary" type="Area2D" parent="."]
 pause_mode = 1
@@ -2186,7 +2160,7 @@ shape = SubResource( 7 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Granary"]
-texture = ExtResource( 23 )
+texture = ExtResource( 22 )
 
 [node name="Dungeon" type="Area2D" parent="."]
 pause_mode = 1
@@ -2207,7 +2181,7 @@ shape = SubResource( 8 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Dungeon"]
-texture = ExtResource( 24 )
+texture = ExtResource( 23 )
 
 [node name="Info" type="Label" parent="."]
 pause_mode = 1
@@ -2233,9 +2207,28 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="Dark" type="ColorRect" parent="."]
+pause_mode = 1
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -176.0
+margin_top = -129.0
+margin_right = 1542.0
+margin_bottom = 989.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 0.858824 )
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
-stream = ExtResource( 25 )
+stream = ExtResource( 24 )
 volume_db = -20.0
 pitch_scale = 1.0
 autoplay = true
@@ -2245,7 +2238,7 @@ bus = "Master"
 
 [node name="Rumble" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
-stream = ExtResource( 26 )
+stream = ExtResource( 25 )
 volume_db = -50.0
 pitch_scale = 1.0
 autoplay = true
@@ -2255,7 +2248,7 @@ bus = "Master"
 
 [node name="Strike" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
-stream = ExtResource( 27 )
+stream = ExtResource( 26 )
 volume_db = -25.0
 pitch_scale = 1.0
 autoplay = false
