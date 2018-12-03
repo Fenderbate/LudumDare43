@@ -30,5 +30,5 @@ graphics:
   - [ ] UI border
 
   **Other**
-  - [ ] Cloud 1
-  - [ ] Cloud 2
+  - [x] Cloud 1
+  - [x] Cloud 2
