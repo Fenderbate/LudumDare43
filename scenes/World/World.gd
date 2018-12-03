@@ -46,7 +46,7 @@ func _ready():
 	$Timers/VillageTick.start()
 	$Timers/CastleTick.start()
 	
-	$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,100),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,200),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
 	$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 	$Tween.start()
@@ -313,7 +313,7 @@ func _on_Tween_tween_completed(object, key):
 	match object.name:
 		"Demon":
 			if !up:
-				$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,-100),0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+				$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,-200),0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
 				$Tween.interpolate_property($Sky,"color",$Sky.color,Color("00dbff"),0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
@@ -326,7 +326,7 @@ func _on_Tween_tween_completed(object, key):
 				set_menu_info()
 				up = true
 			else:
-				$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,100),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+				$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,200),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
 				$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
@@ -343,7 +343,7 @@ func _on_Tween_tween_completed(object, key):
 
 func _on_CastleTick_timeout():
 	Global.gold += goldrate
-	spawn_floater($Castle.position,str("Resources +",goldrate),Global.gold_icon)
+	spawn_floater($Castle.position,str("Gold +",goldrate),Global.gold_icon)
 	animate_icon($UI/TopMenu/Gold/Icon.get_path())
 
 

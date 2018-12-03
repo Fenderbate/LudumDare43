@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
@@ -13,11 +13,65 @@
 [ext_resource path="res://icon.png" type="Texture" id=11]
 [ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=12]
 [ext_resource path="res://art/dark.png" type="Texture" id=13]
-[ext_resource path="res://art/Village.png" type="Texture" id=14]
-[ext_resource path="res://art/Castle.png" type="Texture" id=15]
-[ext_resource path="res://art/Factory.png" type="Texture" id=16]
-[ext_resource path="res://art/Granary.png" type="Texture" id=17]
-[ext_resource path="res://art/Dungeon.png" type="Texture" id=18]
+[ext_resource path="res://art/Cloud1.png" type="Texture" id=14]
+[ext_resource path="res://art/Cloud2.png" type="Texture" id=15]
+[ext_resource path="res://art/Demon.png" type="Texture" id=16]
+[ext_resource path="res://art/Map.png" type="Texture" id=17]
+[ext_resource path="res://art/Village.png" type="Texture" id=18]
+[ext_resource path="res://art/Castle.png" type="Texture" id=19]
+[ext_resource path="res://art/Factory.png" type="Texture" id=20]
+[ext_resource path="res://art/Granary.png" type="Texture" id=21]
+[ext_resource path="res://art/Dungeon.png" type="Texture" id=22]
+
+[sub_resource type="Gradient" id=8]
+
+offsets = PoolRealArray( 0, 0.992565, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+
+flags = 4
+gradient = SubResource( 8 )
+width = 2048
+
+[sub_resource type="ParticlesMaterial" id=7]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 120.0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = -60.0
+initial_velocity_random = 1.0
+angular_velocity = 0.0
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 0.4
+scale_random = 0.0
+color_ramp = SubResource( 9 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -60,6 +114,7 @@ blend_times = [  ]
 [node name="AnimPlayers" type="Node" parent="."]
 
 [node name="Timers" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="GodTimer" type="Timer" parent="Timers"]
 process_mode = 1
@@ -1076,31 +1131,75 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0, 0.858824, 1, 1 )
 
-[node name="Demon" type="Sprite" parent="."]
-position = Vector2( 643, 295 )
-scale = Vector2( 2.76563, 1.84375 )
-texture = ExtResource( 11 )
+[node name="C_Big" type="Particles2D" parent="Sky"]
+position = Vector2( 1563, 148 )
+scale = Vector2( 0.5, 0.5 )
+emitting = true
+amount = 4
+lifetime = 200.0
+one_shot = false
+preprocess = 10.0
+speed_scale = 2.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -500, -200, 1000, 400 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 7 )
+texture = ExtResource( 14 )
+normal_map = null
+h_frames = 1
+v_frames = 1
 
-[node name="Ground" type="ColorRect" parent="."]
+[node name="C_Small" type="Particles2D" parent="Sky"]
+position = Vector2( 1561, 147 )
+scale = Vector2( 0.5, 0.5 )
+emitting = true
+amount = 6
+lifetime = 200.0
+one_shot = false
+preprocess = 10.0
+speed_scale = 3.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -500, -200, 1000, 400 )
+local_coords = false
+draw_order = 0
+process_material = SubResource( 7 )
+texture = ExtResource( 15 )
+normal_map = null
+h_frames = 1
+v_frames = 1
+
+[node name="Demon" type="Sprite" parent="."]
+position = Vector2( 643, 330 )
+texture = ExtResource( 16 )
+
+[node name="Ground" type="TextureRect" parent="."]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -118.0
-margin_top = 222.0
-margin_right = 1382.0
-margin_bottom = 822.0
+margin_left = -136.0
+margin_top = 193.0
+margin_right = 1364.0
+margin_bottom = 793.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0.317647, 0.392157, 0.266667, 1 )
+texture = ExtResource( 17 )
+stretch_mode = 4
 
 [node name="Village" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 210, 352 )
+position = Vector2( 249, 361 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -1118,11 +1217,11 @@ shape = SubResource( 1 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Village"]
-texture = ExtResource( 14 )
+texture = ExtResource( 18 )
 
 [node name="Castle" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 633, 441 )
+position = Vector2( 612, 431 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -1138,11 +1237,11 @@ shape = SubResource( 2 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Castle"]
-texture = ExtResource( 15 )
+texture = ExtResource( 19 )
 
 [node name="Factory" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 303, 583 )
+position = Vector2( 340, 598 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -1159,7 +1258,7 @@ shape = SubResource( 6 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Factory"]
-texture = ExtResource( 16 )
+texture = ExtResource( 20 )
 
 [node name="Granary" type="Area2D" parent="."]
 editor/display_folded = true
@@ -1180,11 +1279,11 @@ shape = SubResource( 4 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Granary"]
-texture = ExtResource( 17 )
+texture = ExtResource( 21 )
 
 [node name="Dungeon" type="Area2D" parent="."]
 editor/display_folded = true
-position = Vector2( 996, 592 )
+position = Vector2( 927, 621 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -1200,7 +1299,7 @@ shape = SubResource( 5 )
 position = Vector2( -76.2837, 69.7589 )
 
 [node name="Sprite" type="Sprite" parent="Dungeon"]
-texture = ExtResource( 18 )
+texture = ExtResource( 22 )
 
 [node name="Info" type="Label" parent="."]
 light_mask = 0
