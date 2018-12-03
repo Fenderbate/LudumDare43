@@ -47,7 +47,7 @@ var no_negative = true
 
 var food = 100
 var resources = 200
-var people = 50
+export var people = 50
 var gold = 1000
 
 
@@ -66,6 +66,19 @@ var god_resources_blessing = 50
 var god_people_blessing = 50
 var god_gold_blessing = 650
 
+var tutorial = true
+
+func reset_resources():
+	food = 100
+	resources = 200
+	people = 50
+	gold = 1000
+	
+	
+	dungeon_food = 320
+	dungeon_resources = 400
+	dungeon_people = 160
+	dungeon_gold = 3000
 
 func set_food(value):
 	

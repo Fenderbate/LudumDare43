@@ -1,9 +1,9 @@
 extends Node2D
 
-var foodrate = 1.0 setget set_foodrate
-var pplrate = 1 setget set_pplrate
-var resrate = 2.0 setget set_resrate
-var goldrate = 25.0 setget set_goldrate
+var foodrate = 1.0 
+var pplrate = 1 
+var resrate = 2.0 
+var goldrate = 25.0 
 
 var up = false
 
@@ -19,22 +19,68 @@ var no_gold = false
 var no_resources = false
 var no_food = false
 
-func set_foodrate(value):
-	foodrate = value
+var tutorial_index = 0 setget set_tutorial_index
 
-func set_pplrate(value):
-	pplrate = value
 
-func set_resrate(value):
-	resrate = value
+func set_tutorial_index(value):
+	
+	tutorial_index = value
+	
+	for child in $UI/Tutorials.get_children():
+		if child.name != "Next":
+			child.hide()
+	
+	match tutorial_index:
+		-1:
+			Global.tutorial = false
+			for child in $UI/Tutorials.get_children():
+				child.hide()
+			
+			Global.food = 100
+			Global.resources = 200
+			Global.people = 50
+			Global.gold = 1000
+			
+			Global.dungeon_food = 320
+			Global.dungeon_resources = 400
+			Global.dungeon_people = 160
+			Global.dungeon_gold = 3000
+			
+			set_menu_info()
+			
+			start_demon()
+		1:
+			$UI/Tutorials/Next.show()
+			$UI/Tutorials/"1".show()
+			Global.tutorial = false
+		2:
+			$UI/Tutorials/"2".show()
+		3:
+			$UI/Tutorials/"3".show()
+		4:
+			$UI/Tutorials/"4".show()
+		5:
+			$UI/Tutorials/"5".show()
+		6:
+			$UI/Tutorials/"6".show()
+		7:
+			$UI/Tutorials/"7".show()
+		8:
+			$UI/Tutorials/"8".show()
+			$UI/Tutorials/Next.hide()
+		_:
+			print("tutorial index value: ",tutorial_index)
+	
 
-func set_goldrate(value):
-	goldrate = value
+	
 
 func _ready():
 	randomize()
 	
-	
+	if Global.tutorial:
+		$UI/Tutorials/"0".show()
+	else:
+		start_demon()
 	
 	set_menu_info()
 	
@@ -46,16 +92,7 @@ func _ready():
 	$Timers/VillageTick.start()
 	$Timers/CastleTick.start()
 	
-	$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,200),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
-	$Tween.start()
-	$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
-	$Tween.start()
-	$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
-	$Tween.start()
-#	$Tween.interpolate_property($Music,"pitch_scale",1,0.9,20,Tween.TRANS_LINEAR,Tween.EASE_OUT)
-#	$Tween.start()
-	$Tween.interpolate_property($Rumble,"volume_db",-50,-10,20,Tween.TRANS_LINEAR,Tween.EASE_OUT)
-	$Tween.start()
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -180,6 +217,18 @@ func click_info(text, color = Color(1,1,1,1)):
 			Tween.EASE_IN
 			)
 	$UI/ClickInfoLabel/Tween.start()
+
+func start_demon():
+	$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,200),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	$Tween.start()
+	$Tween.interpolate_property($Sky,"color",$Sky.color,Color("2f0000"),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	$Tween.start()
+	$Tween.interpolate_property($Dark,"energy",$Dark.energy,0.8,20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
+	$Tween.start()
+#	$Tween.interpolate_property($Music,"pitch_scale",1,0.9,20,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+#	$Tween.start()
+	$Tween.interpolate_property($Rumble,"volume_db",-50,-10,20,Tween.TRANS_LINEAR,Tween.EASE_OUT)
+	$Tween.start()
 
 func _on_Building_input_event(viewport, event, shape_idx, building_name):
 	
@@ -317,6 +366,7 @@ func _on_Tween_tween_completed(object, key):
 	match object.name:
 		"Demon":
 			if !up:
+				$Strike.play()
 				$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,-200),0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
 				$Tween.interpolate_property($Sky,"color",$Sky.color,Color("00dbff"),0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
@@ -443,3 +493,26 @@ func _on_God_button_down(namee):
 
 
 
+
+
+func _on_No_button_down():
+	self.tutorial_index = 1
+
+
+func _on_Yes_button_down():
+	self.tutorial_index = -1
+
+
+func _on_Next_button_down():
+	self.tutorial_index += 1
+
+
+func _on_Start_button_down():
+	self.tutorial_index = -1
+
+
+func _on_Retry_button_down():
+	Global.reset_resources()
+	$UI/Lost.hide()
+	get_tree().paused = false
+	get_tree().reload_current_scene()

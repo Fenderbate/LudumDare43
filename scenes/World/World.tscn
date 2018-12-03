@@ -1,18 +1,18 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/World/World.gd" type="Script" id=1]
 [ext_resource path="res://animatons/Boop.tres" type="Animation" id=2]
 [ext_resource path="res://misc/Font_x72_outlined.tres" type="DynamicFont" id=3]
-[ext_resource path="res://art/Red_arrow.png" type="Texture" id=4]
-[ext_resource path="res://art/Red_circle.png" type="Texture" id=5]
-[ext_resource path="res://art/Food.png" type="Texture" id=6]
-[ext_resource path="res://misc/Font.tres" type="DynamicFont" id=7]
-[ext_resource path="res://art/People.png" type="Texture" id=8]
-[ext_resource path="res://art/Resource.png" type="Texture" id=9]
-[ext_resource path="res://art/Gold.png" type="Texture" id=10]
-[ext_resource path="res://art/Good_arrow.png" type="Texture" id=11]
-[ext_resource path="res://art/black_pixel.png" type="Texture" id=12]
-[ext_resource path="res://icon.png" type="Texture" id=13]
+[ext_resource path="res://art/button.png" type="Texture" id=4]
+[ext_resource path="res://misc/Font.tres" type="DynamicFont" id=5]
+[ext_resource path="res://art/Red_arrow.png" type="Texture" id=6]
+[ext_resource path="res://art/Red_circle.png" type="Texture" id=7]
+[ext_resource path="res://art/Food.png" type="Texture" id=8]
+[ext_resource path="res://art/People.png" type="Texture" id=9]
+[ext_resource path="res://art/Resource.png" type="Texture" id=10]
+[ext_resource path="res://art/Gold.png" type="Texture" id=11]
+[ext_resource path="res://art/Good_arrow.png" type="Texture" id=12]
+[ext_resource path="res://art/button_dark.png" type="Texture" id=13]
 [ext_resource path="res://misc/Font_x72.tres" type="DynamicFont" id=14]
 [ext_resource path="res://art/dark.png" type="Texture" id=15]
 [ext_resource path="res://art/Cloud1.png" type="Texture" id=16]
@@ -26,19 +26,20 @@
 [ext_resource path="res://art/Dungeon.png" type="Texture" id=24]
 [ext_resource path="res://audio/music/BG_Music.wav" type="AudioStream" id=25]
 [ext_resource path="res://audio/sound/rumble.wav" type="AudioStream" id=26]
+[ext_resource path="res://audio/sound/strike.ogg" type="AudioStream" id=27]
 
-[sub_resource type="Gradient" id=8]
+[sub_resource type="Gradient" id=1]
 
 offsets = PoolRealArray( 0, 0.992565, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=9]
+[sub_resource type="GradientTexture" id=2]
 
 flags = 4
-gradient = SubResource( 8 )
+gradient = SubResource( 1 )
 width = 2048
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=3]
 
 render_priority = 0
 trail_divisor = 1
@@ -68,7 +69,7 @@ angle = 0.0
 angle_random = 0.0
 scale = 0.4
 scale_random = 0.0
-color_ramp = SubResource( 9 )
+color_ramp = SubResource( 2 )
 hue_variation = 0.0
 hue_variation_random = 0.0
 anim_speed = 0.0
@@ -77,13 +78,13 @@ anim_offset = 0.0
 anim_offset_random = 0.0
 anim_loop = false
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=4]
 
 custom_solver_bias = 0.0
 radius = 89.0
 height = 106.422
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
 extents = Vector2( 122, 104 )
@@ -93,20 +94,22 @@ extents = Vector2( 122, 104 )
 custom_solver_bias = 0.0
 extents = Vector2( 97, 62 )
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=7]
 
 custom_solver_bias = 0.0
 radius = 119.151
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=8]
 
 custom_solver_bias = 0.0
 extents = Vector2( 67.3942, 80.4605 )
 
 [node name="World" type="Node2D"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 1
 root_node = NodePath("..")
 autoplay = ""
 playback_process_mode = 1
@@ -116,8 +119,10 @@ anims/boop = ExtResource( 2 )
 blend_times = [  ]
 
 [node name="AnimPlayers" type="Node" parent="."]
+pause_mode = 1
 
 [node name="Timers" type="Node" parent="."]
+pause_mode = 1
 editor/display_folded = true
 
 [node name="GodTimer" type="Timer" parent="Timers"]
@@ -195,6 +200,7 @@ one_shot = true
 autostart = false
 
 [node name="UI" type="CanvasLayer" parent="."]
+pause_mode = 1
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -202,7 +208,168 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="Tutorials" type="Node" parent="UI"]
+pause_mode = 1
 editor/display_folded = true
+
+[node name="0" type="Control" parent="UI/Tutorials"]
+editor/display_folded = true
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Fog" type="ColorRect" parent="UI/Tutorials/0"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 1.0
+margin_right = 1282.0
+margin_bottom = 722.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 0.639216 )
+
+[node name="Label" type="Label" parent="UI/Tutorials/0"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 89.0
+margin_top = 182.0
+margin_right = 1175.0
+margin_bottom = 377.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "The tutorial is intended for first time players.
+Would you like to skip it?"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Tutorials/0"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_top = 399.0
+margin_right = 1279.0
+margin_bottom = 463.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 200
+alignment = 1
+
+[node name="Yes" type="TextureButton" parent="UI/Tutorials/0/HBoxContainer"]
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 339.0
+margin_right = 539.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="UI/Tutorials/0/HBoxContainer/Yes"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -5.0
+margin_bottom = -5.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Yes"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="No" type="TextureButton" parent="UI/Tutorials/0/HBoxContainer"]
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 739.0
+margin_right = 939.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="UI/Tutorials/0/HBoxContainer/No"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -5.0
+margin_bottom = -5.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "No"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="1" type="Control" parent="UI/Tutorials"]
 editor/display_folded = true
@@ -263,7 +430,7 @@ max_lines_visible = -1
 position = Vector2( 807, 133 )
 rotation = -2.48906
 scale = Vector2( 2.11424, 2.11424 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 
 [node name="2" type="Control" parent="UI/Tutorials"]
 editor/display_folded = true
@@ -326,12 +493,12 @@ max_lines_visible = -1
 position = Vector2( 771, 450 )
 rotation = -0.690343
 scale = Vector2( 3.37435, 4.40348 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 
 [node name="Red_circle5" type="Sprite" parent="UI/Tutorials/2"]
 position = Vector2( 936, 586 )
 scale = Vector2( 0.995048, 0.927614 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="3" type="Control" parent="UI/Tutorials"]
 editor/display_folded = true
@@ -382,7 +549,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
-text = "Your buildings create resources, but they're slow"
+text = "Your buildings create resources, but they're slow."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -392,7 +559,7 @@ visible = false
 position = Vector2( 807, 133 )
 rotation = -2.48906
 scale = Vector2( 2.11424, 2.11424 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 
 [node name="4" type="Control" parent="UI/Tutorials"]
 editor/display_folded = true
@@ -436,6 +603,7 @@ margin_left = 2.0
 margin_top = 44.0
 margin_right = 1334.0
 margin_bottom = 239.0
+rect_scale = Vector2( 0.96, 0.96 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -454,27 +622,27 @@ visible = false
 position = Vector2( 807, 133 )
 rotation = -2.48906
 scale = Vector2( 2.11424, 2.11424 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 
 [node name="Red_circle" type="Sprite" parent="UI/Tutorials/4"]
 position = Vector2( 233, 340 )
 scale = Vector2( 1.38045, 1.31056 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Red_circle2" type="Sprite" parent="UI/Tutorials/4"]
 position = Vector2( 1007, 330 )
 scale = Vector2( 1.38045, 1.09831 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Red_circle3" type="Sprite" parent="UI/Tutorials/4"]
 position = Vector2( 335, 596 )
 scale = Vector2( 0.907195, 0.560638 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="Red_circle5" type="Sprite" parent="UI/Tutorials/4"]
 position = Vector2( 623, 394 )
 scale = Vector2( 1.06634, 1.59818 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 
 [node name="5" type="Control" parent="UI/Tutorials"]
 editor/display_folded = true
@@ -518,6 +686,7 @@ margin_left = 2.0
 margin_top = 44.0
 margin_right = 1334.0
 margin_bottom = 239.0
+rect_scale = Vector2( 0.96, 0.96 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -525,22 +694,24 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
-text = "You can sacrifice some resources to the gods
-in exchange for others."
+text = "The buildings will slow down overtime, so make sure
+you click them every so often."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Red_arrow" type="Sprite" parent="UI/Tutorials/5"]
-position = Vector2( 715, 445 )
-rotation = 0.166756
-scale = Vector2( 3.8963, 7.66751 )
-texture = ExtResource( 4 )
+visible = false
+position = Vector2( 807, 133 )
+rotation = -2.48906
+scale = Vector2( 2.11424, 2.11424 )
+texture = ExtResource( 6 )
 
-[node name="Red_circle5" type="Sprite" parent="UI/Tutorials/5"]
-position = Vector2( 624, 676 )
-scale = Vector2( 1.13196, 0.386585 )
-texture = ExtResource( 5 )
+[node name="Red_circle" type="Sprite" parent="UI/Tutorials/5"]
+visible = false
+position = Vector2( 233, 340 )
+scale = Vector2( 1.38045, 1.31056 )
+texture = ExtResource( 7 )
 
 [node name="6" type="Control" parent="UI/Tutorials"]
 editor/display_folded = true
@@ -563,6 +734,75 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_left = -1.0
+margin_top = 59.0
+margin_right = 1334.0
+margin_bottom = 438.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 0.639216 )
+
+[node name="Label" type="Label" parent="UI/Tutorials/6"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 2.0
+margin_top = 44.0
+margin_right = 1334.0
+margin_bottom = 239.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "You can sacrifice some resources to the gods
+in exchange for others.
+A sacrifice makes them satisfied for 30 seconds
+and you have to wait to use them again."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Red_arrow" type="Sprite" parent="UI/Tutorials/6"]
+position = Vector2( 693, 537 )
+rotation = 0.166756
+scale = Vector2( 3.24578, 4.33334 )
+texture = ExtResource( 6 )
+
+[node name="Red_circle5" type="Sprite" parent="UI/Tutorials/6"]
+position = Vector2( 624, 676 )
+scale = Vector2( 1.13196, 0.386585 )
+z_index = 1
+texture = ExtResource( 7 )
+
+[node name="7" type="Control" parent="UI/Tutorials"]
+editor/display_folded = true
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Fog" type="ColorRect" parent="UI/Tutorials/7"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = -24.0
 margin_top = 134.0
 margin_right = 1343.0
@@ -575,7 +815,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0, 0, 0, 0.639216 )
 
-[node name="Label" type="Label" parent="UI/Tutorials/6"]
+[node name="Label" type="Label" parent="UI/Tutorials/7"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -597,19 +837,192 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Red_arrow" type="Sprite" parent="UI/Tutorials/6"]
+[node name="Red_arrow" type="Sprite" parent="UI/Tutorials/7"]
 position = Vector2( 222, 103 )
 rotation = 3.03575
 scale = Vector2( 2.32636, 2.09192 )
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 
-[node name="Red_circle5" type="Sprite" parent="UI/Tutorials/6"]
+[node name="Red_circle5" type="Sprite" parent="UI/Tutorials/7"]
 visible = false
 position = Vector2( 624, 676 )
 scale = Vector2( 1.13196, 0.386585 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
+
+[node name="8" type="Control" parent="UI/Tutorials"]
+editor/display_folded = true
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Fog" type="ColorRect" parent="UI/Tutorials/8"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -24.0
+margin_top = 134.0
+margin_right = 1343.0
+margin_bottom = 431.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 0.639216 )
+
+[node name="Label" type="Label" parent="UI/Tutorials/8"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 11.0
+margin_top = 119.0
+margin_right = 1343.0
+margin_bottom = 314.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+text = "The demon will come every 20 seconds
+to take your resources. Be ready!"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Red_arrow" type="Sprite" parent="UI/Tutorials/8"]
+visible = false
+position = Vector2( 222, 103 )
+rotation = 3.03575
+scale = Vector2( 2.32636, 2.09192 )
+texture = ExtResource( 6 )
+
+[node name="Red_circle5" type="Sprite" parent="UI/Tutorials/8"]
+visible = false
+position = Vector2( 624, 676 )
+scale = Vector2( 1.13196, 0.386585 )
+texture = ExtResource( 7 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Tutorials/8"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 341.0
+margin_right = 1280.0
+margin_bottom = 405.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+
+[node name="Start" type="TextureButton" parent="UI/Tutorials/8/HBoxContainer"]
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 540.0
+margin_right = 740.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="UI/Tutorials/8/HBoxContainer/Start"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -5.0
+margin_bottom = -5.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Start"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Next" type="TextureButton" parent="UI/Tutorials"]
+editor/display_folded = true
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = 446.0
+margin_right = 198.0
+margin_bottom = 510.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="UI/Tutorials/Next"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -5.0
+margin_bottom = -5.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Next"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [node name="ClickInfoLabel" type="Label" parent="UI"]
+pause_mode = 1
 editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
@@ -640,6 +1053,7 @@ playback/repeat = false
 playback/speed = 1.0
 
 [node name="TopMenu" type="ColorRect" parent="UI"]
+pause_mode = 1
 editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
@@ -676,7 +1090,7 @@ size_flags_vertical = 1
 light_mask = 0
 position = Vector2( 20, 25 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Food"]
 light_mask = 0
@@ -693,7 +1107,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -720,7 +1134,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/People"]
 light_mask = 0
 position = Vector2( 19, 24 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/People"]
 light_mask = 0
@@ -737,7 +1151,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -764,7 +1178,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Resources"]
 light_mask = 0
 position = Vector2( 17, 28 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Resources"]
 light_mask = 0
@@ -781,7 +1195,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -808,7 +1222,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/Gold"]
 light_mask = 0
 position = Vector2( 20, 20 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/Gold"]
 light_mask = 0
@@ -825,7 +1239,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -869,7 +1283,7 @@ size_flags_vertical = 1
 light_mask = 0
 position = Vector2( 20, 25 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/D_Food"]
 light_mask = 0
@@ -886,7 +1300,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -913,7 +1327,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/D_Poeple"]
 light_mask = 0
 position = Vector2( 19, 24 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/D_Poeple"]
 light_mask = 0
@@ -930,7 +1344,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -957,7 +1371,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/D_Resources"]
 light_mask = 0
 position = Vector2( 17, 28 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/D_Resources"]
 light_mask = 0
@@ -974,7 +1388,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -1001,7 +1415,7 @@ size_flags_vertical = 1
 [node name="Icon" type="Sprite" parent="UI/TopMenu/D_Gold"]
 light_mask = 0
 position = Vector2( 20, 20 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 
 [node name="Value" type="Label" parent="UI/TopMenu/D_Gold"]
 light_mask = 0
@@ -1018,7 +1432,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 valign = 1
 percent_visible = 1.0
 lines_skipped = 0
@@ -1041,7 +1455,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 text = "Food                              People                          Resources                 Gold"
 align = 1
 valign = 1
@@ -1050,6 +1464,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="DungeonText" type="Label" parent="UI/TopMenu"]
+visible = false
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -1066,7 +1481,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 text = "Resources for
 the dungeon"
 align = 1
@@ -1076,6 +1491,8 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="BotMenu" type="ColorRect" parent="UI"]
+pause_mode = 1
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -1091,6 +1508,7 @@ size_flags_vertical = 1
 color = Color( 0.211765, 0.164706, 0.117647, 1 )
 
 [node name="PopupButton" type="TextureButton" parent="UI/BotMenu"]
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -1111,6 +1529,11 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 
+[node name="Sprite" type="Sprite" parent="UI/BotMenu/PopupButton"]
+position = Vector2( 98, 25 )
+scale = Vector2( 1.4, 1.4 )
+texture = ExtResource( 4 )
+
 [node name="Label" type="Label" parent="UI/BotMenu/PopupButton"]
 anchor_left = 0.0
 anchor_top = 0.0
@@ -1127,7 +1550,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 text = "Gods"
 percent_visible = 1.0
 lines_skipped = 0
@@ -1136,17 +1559,19 @@ max_lines_visible = -1
 [node name="Arrow" type="Sprite" parent="UI/BotMenu/PopupButton"]
 position = Vector2( 166, 28 )
 rotation = 3.14159
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="Progress" type="TextureProgress" parent="UI/BotMenu/PopupButton"]
-modulate = Color( 1, 1, 1, 0.643137 )
+self_modulate = Color( 1, 1, 1, 0.627451 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -185.0
-margin_bottom = -60.0
-rect_scale = Vector2( 180, 61.88 )
+margin_left = -43.0
+margin_top = -21.0
+margin_right = -29.0
+margin_bottom = -18.0
+rect_scale = Vector2( 1.4, 1.4 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -1164,7 +1589,7 @@ allow_greater = false
 allow_lesser = false
 texture_under = null
 texture_over = null
-texture_progress = ExtResource( 12 )
+texture_progress = ExtResource( 13 )
 fill_mode = 3
 tint_under = Color( 1, 1, 1, 1 )
 tint_over = Color( 1, 1, 1, 1 )
@@ -1190,7 +1615,7 @@ custom_constants/separation = 100
 alignment = 1
 
 [node name="Kaja" type="TextureButton" parent="UI/BotMenu/HBoxContainer"]
-editor/display_folded = true
+self_modulate = Color( 1, 0.843137, 0, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -1210,7 +1635,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 13 )
+texture_normal = ExtResource( 8 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/HBoxContainer/Kaja"]
@@ -1219,16 +1644,16 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 3.0
-margin_top = 149.0
+margin_top = 110.0
 margin_right = 145.0
-margin_bottom = 254.0
+margin_bottom = 215.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 text = "Kaja
 Gold -200
 Food + 50"
@@ -1239,7 +1664,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Anyag" type="TextureButton" parent="UI/BotMenu/HBoxContainer"]
-editor/display_folded = true
+self_modulate = Color( 1, 0.843137, 0, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -1259,7 +1684,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 13 )
+texture_normal = ExtResource( 10 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/HBoxContainer/Anyag"]
@@ -1267,17 +1692,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -3.0
-margin_top = 148.0
-margin_right = 157.0
-margin_bottom = 257.0
+margin_left = 3.0
+margin_top = 110.0
+margin_right = 163.0
+margin_bottom = 219.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 text = "Anyag
 Gold -200
 Resources + 50"
@@ -1288,7 +1713,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Ember" type="TextureButton" parent="UI/BotMenu/HBoxContainer"]
-editor/display_folded = true
+self_modulate = Color( 1, 0.843137, 0, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -1308,7 +1733,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 13 )
+texture_normal = ExtResource( 9 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/HBoxContainer/Ember"]
@@ -1316,17 +1741,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 2.0
-margin_top = 148.0
-margin_right = 146.0
-margin_bottom = 253.0
+margin_left = 3.0
+margin_top = 110.0
+margin_right = 147.0
+margin_bottom = 215.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 text = "Ember
 Gold -200
 People + 50"
@@ -1337,7 +1762,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Arany" type="TextureButton" parent="UI/BotMenu/HBoxContainer"]
-editor/display_folded = true
+self_modulate = Color( 1, 0.843137, 0, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -1357,7 +1782,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 13 )
+texture_normal = ExtResource( 11 )
 expand = true
 
 [node name="Label" type="Label" parent="UI/BotMenu/HBoxContainer/Arany"]
@@ -1365,16 +1790,17 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 133.0
-margin_right = 151.0
-margin_bottom = 295.0
+margin_left = 3.0
+margin_top = 110.0
+margin_right = 154.0
+margin_bottom = 272.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 text = "Arany
 Gold +650
 Resources -100
@@ -1394,7 +1820,7 @@ playback/active = false
 playback/repeat = false
 playback/speed = 1.0
 
-[node name="Lost" type="TextureRect" parent="UI"]
+[node name="Lost" type="ColorRect" parent="UI"]
 pause_mode = 2
 editor/display_folded = true
 visible = false
@@ -1408,10 +1834,10 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-expand = true
-stretch_mode = 4
+color = Color( 0, 0, 0, 0.890196 )
 
 [node name="Label" type="Label" parent="UI/Lost"]
+pause_mode = 2
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -1431,8 +1857,68 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="Won" type="TextureRect" parent="UI"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Lost"]
 pause_mode = 2
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 472.0
+margin_right = 1281.0
+margin_bottom = 536.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 1
+
+[node name="Retry" type="TextureButton" parent="UI/Lost/HBoxContainer"]
+pause_mode = 2
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 540.0
+margin_right = 740.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+texture_normal = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="UI/Lost/HBoxContainer/Retry"]
+pause_mode = 2
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -9.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Retry"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Won" type="ColorRect" parent="UI"]
+pause_mode = 1
 editor/display_folded = true
 visible = false
 anchor_left = 0.0
@@ -1445,8 +1931,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-expand = true
-stretch_mode = 4
+color = Color( 0, 0, 0, 0.890196 )
 
 [node name="Label" type="Label" parent="UI/Won"]
 anchor_left = 0.0
@@ -1469,6 +1954,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Dark" type="Light2D" parent="."]
+pause_mode = 1
 position = Vector2( 643, 693 )
 enabled = true
 editor_only = false
@@ -1493,6 +1979,7 @@ shadow_filter_smooth = 0.0
 shadow_item_cull_mask = 1
 
 [node name="Tween" type="Tween" parent="."]
+pause_mode = 1
 repeat = false
 playback_process_mode = 1
 playback_speed = 1.0
@@ -1501,6 +1988,7 @@ playback/repeat = false
 playback/speed = 1.0
 
 [node name="Camera" type="Camera2D" parent="."]
+pause_mode = 1
 anchor_mode = 0
 rotating = false
 current = true
@@ -1525,6 +2013,7 @@ editor_draw_limits = false
 editor_draw_drag_margin = false
 
 [node name="Sky" type="ColorRect" parent="."]
+pause_mode = 1
 editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
@@ -1559,7 +2048,7 @@ fract_delta = true
 visibility_rect = Rect2( -500, -200, 1000, 400 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 7 )
+process_material = SubResource( 3 )
 texture = ExtResource( 16 )
 normal_map = null
 h_frames = 1
@@ -1581,17 +2070,19 @@ fract_delta = true
 visibility_rect = Rect2( -500, -200, 1000, 400 )
 local_coords = false
 draw_order = 0
-process_material = SubResource( 7 )
+process_material = SubResource( 3 )
 texture = ExtResource( 17 )
 normal_map = null
 h_frames = 1
 v_frames = 1
 
 [node name="Demon" type="Sprite" parent="."]
+pause_mode = 1
 position = Vector2( 643, 330 )
 texture = ExtResource( 18 )
 
 [node name="Ground" type="TextureRect" parent="."]
+pause_mode = 1
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -1610,6 +2101,7 @@ texture = ExtResource( 19 )
 stretch_mode = 4
 
 [node name="Village" type="Area2D" parent="."]
+pause_mode = 1
 editor/display_folded = true
 position = Vector2( 249, 361 )
 input_pickable = true
@@ -1623,7 +2115,7 @@ audio_bus_name = "Master"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Village"]
 position = Vector2( -12, 19 )
 rotation = 1.61301
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="WidgetPivot" type="Position2D" parent="Village"]
 position = Vector2( -76.2837, 69.7589 )
@@ -1632,6 +2124,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 20 )
 
 [node name="Castle" type="Area2D" parent="."]
+pause_mode = 1
 editor/display_folded = true
 position = Vector2( 612, 431 )
 input_pickable = true
@@ -1643,7 +2136,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Castle"]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="WidgetPivot" type="Position2D" parent="Castle"]
 position = Vector2( -76.2837, 69.7589 )
@@ -1652,6 +2145,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 21 )
 
 [node name="Factory" type="Area2D" parent="."]
+pause_mode = 1
 editor/display_folded = true
 position = Vector2( 340, 598 )
 input_pickable = true
@@ -1673,6 +2167,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 22 )
 
 [node name="Granary" type="Area2D" parent="."]
+pause_mode = 1
 editor/display_folded = true
 position = Vector2( 997, 343 )
 input_pickable = true
@@ -1685,7 +2180,7 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Granary"]
 position = Vector2( -1, 22 )
-shape = SubResource( 4 )
+shape = SubResource( 7 )
 
 [node name="WidgetPivot" type="Position2D" parent="Granary"]
 position = Vector2( -76.2837, 69.7589 )
@@ -1694,6 +2189,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 23 )
 
 [node name="Dungeon" type="Area2D" parent="."]
+pause_mode = 1
 editor/display_folded = true
 position = Vector2( 927, 621 )
 input_pickable = true
@@ -1705,7 +2201,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dungeon"]
-shape = SubResource( 5 )
+shape = SubResource( 8 )
 
 [node name="WidgetPivot" type="Position2D" parent="Dungeon"]
 position = Vector2( -76.2837, 69.7589 )
@@ -1714,6 +2210,7 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 24 )
 
 [node name="Info" type="Label" parent="."]
+pause_mode = 1
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -1729,7 +2226,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 7 )
+custom_fonts/font = ExtResource( 5 )
 align = 1
 valign = 1
 percent_visible = 1.0
@@ -1737,6 +2234,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 1
 stream = ExtResource( 25 )
 volume_db = -20.0
 pitch_scale = 1.0
@@ -1746,10 +2244,21 @@ mix_target = 0
 bus = "Master"
 
 [node name="Rumble" type="AudioStreamPlayer" parent="."]
+pause_mode = 1
 stream = ExtResource( 26 )
 volume_db = -50.0
 pitch_scale = 1.0
 autoplay = true
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
+[node name="Strike" type="AudioStreamPlayer" parent="."]
+pause_mode = 1
+stream = ExtResource( 27 )
+volume_db = -25.0
+pitch_scale = 1.0
+autoplay = false
 stream_paused = false
 mix_target = 0
 bus = "Master"
@@ -1759,11 +2268,16 @@ bus = "Master"
 [connection signal="timeout" from="Timers/FactoryTick" to="." method="_on_FactoryTick_timeout"]
 [connection signal="timeout" from="Timers/GranaryTick" to="." method="_on_GranaryTick_timeout"]
 [connection signal="timeout" from="Timers/VillageTick" to="." method="_on_Villagetick_timeout"]
+[connection signal="button_down" from="UI/Tutorials/0/HBoxContainer/Yes" to="." method="_on_Yes_button_down"]
+[connection signal="button_down" from="UI/Tutorials/0/HBoxContainer/No" to="." method="_on_No_button_down"]
+[connection signal="button_down" from="UI/Tutorials/8/HBoxContainer/Start" to="." method="_on_Start_button_down"]
+[connection signal="button_down" from="UI/Tutorials/Next" to="." method="_on_Next_button_down"]
 [connection signal="button_down" from="UI/BotMenu/PopupButton" to="." method="_on_PopupButton_button_down"]
 [connection signal="button_down" from="UI/BotMenu/HBoxContainer/Kaja" to="." method="_on_God_button_down" binds= [ "Kaja" ]]
 [connection signal="button_down" from="UI/BotMenu/HBoxContainer/Anyag" to="." method="_on_God_button_down" binds= [ "Anyag" ]]
 [connection signal="button_down" from="UI/BotMenu/HBoxContainer/Ember" to="." method="_on_God_button_down" binds= [ "Ember" ]]
 [connection signal="button_down" from="UI/BotMenu/HBoxContainer/Arany" to="." method="_on_God_button_down" binds= [ "Arany" ]]
+[connection signal="button_down" from="UI/Lost/HBoxContainer/Retry" to="." method="_on_Retry_button_down"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="input_event" from="Village" to="." method="_on_Building_input_event" binds= [ "Village" ]]
 [connection signal="mouse_entered" from="Village" to="." method="_on_Building_mouse_entered" binds= [ "Village" ]]
