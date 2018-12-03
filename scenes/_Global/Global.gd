@@ -50,15 +50,22 @@ var resources = 200
 var people = 50
 var gold = 1000
 
-var village_needs = {"Food":50,"Resources":20,"Gold":100}
-var dungeon_needs = {"People":20,"Food":20,"Resources":50,"Gold":200}
-var granary_needs = {"People":10,"Resources":20,"Gold":100}
-var factory_needs = {"People":30,"Food":30,"Gold":300}
 
-var base_village_needs = {"Food":50,"Resources":20,"Gold":100}
-var base_dungeon_needs = {"People":20,"Food":20,"Resources":50,"Gold":200}
-var base_granary_needs = {"People":10,"Resources":20,"Gold":100}
-var base_factory_needs = {"Poeple":30,"Food":30,"Gold":300}
+var dungeon_food = 500
+var dungeon_resources = 500
+var dungeon_people = 500
+var dungeon_gold = 5000
+
+var d_food_remove = 50
+var d_resources_remove = 50
+var d_people_remove = 50
+var d_gold_remove = 500
+
+var god_food_blessing = 50
+var god_resources_blessing = 50
+var god_people_blessing = 30
+var god_gold_blessing = 650
+
 
 func set_food(value):
 	

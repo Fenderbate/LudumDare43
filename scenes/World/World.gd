@@ -12,7 +12,7 @@ var click_reduce = 0.05
 var factory_tick_max = 2.0
 var granary_tick_max = 1.0
 var village_tick_max = 3.0
-var castle_tick_max = 1.0
+var castle_tick_max = 2.0
 
 var no_people = false
 var no_gold = false
@@ -36,7 +36,7 @@ func _ready():
 	
 	
 	
-	set_menu_info_nopar()
+	set_menu_info()
 	
 	$Timers/FactoryTick.wait_time = factory_tick_max
 	$Timers/VillageTick.wait_time = village_tick_max
@@ -56,7 +56,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	set_menu_info_nopar()
+	set_menu_info()
 	$UI/BotMenu/PopupButton/Progress.value = float($Timers/GodTimer.time_left / $Timers/GodTimer.wait_time) * 100
 	
 
@@ -70,8 +70,8 @@ func _draw():
 	
 func info_text(text,position):
 	
-	$Info.rect_position = position - $Info.rect_size/2
 	$Info.text = text
+	$Info.rect_position = position - $Info.rect_size/2
 
 func spawn_floater(start_position,text,icon = null):
 	var f = Global.floater.instance()
@@ -82,11 +82,16 @@ func spawn_floater(start_position,text,icon = null):
 	add_child(f)
 	
 
-func set_menu_info_nopar():
+func set_menu_info():
 	$UI/TopMenu/Food/Value.text = str(Global.food)
 	$UI/TopMenu/People/Value.text = str(Global.people)
 	$UI/TopMenu/Resources/Value.text = str(Global.resources)
 	$UI/TopMenu/Gold/Value.text = str(Global.gold)
+	
+	$UI/TopMenu/D_Food/Value.text = str(Global.dungeon_food)
+	$UI/TopMenu/D_Poeple/Value.text = str(Global.dungeon_people)
+	$UI/TopMenu/D_Resources/Value.text = str(Global.dungeon_resources)
+	$UI/TopMenu/D_Gold/Value.text = str(Global.dungeon_gold)
 	
 	if Global.gold <= 0 and !no_gold:
 		text_bubble($Castle,"My Lord! We have no gold left!")
@@ -169,7 +174,7 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 		match building_name:
 			"Castle":
 #				Global.gold += 10
-#				set_menu_info_nopar()
+#				set_menu_info()
 #				spawn_floater($Castle.position,"Gold +10",Global.gold_icon)
 #				animate($Castle/Sprite.get_path())
 #				animate_icon($UI/TopMenu/Gold/Icon.get_path())
@@ -222,11 +227,39 @@ func _on_Building_input_event(viewport, event, shape_idx, building_name):
 				Global.gold -= Global.village_needs.Gold
 				
 			"Dungeon":
-				return
-				Global.people -= Global.dungeon_needs.People
-				Global.resources -= Global.dungeon_needs.Resources
-				Global.food -= Global.dungeon_needs.Food
-				Global.gold -= Global.dungeon_needs.Gold
+				
+				if(Global.people - Global.d_people_remove <= 0 or
+						Global.resources - Global.d_resources_remove <= 0 or
+						Global.food - Global.d_food_remove <= 0 or
+						Global.gold - Global.d_gold_remove <= 0):
+					click_info("You don't have enough resources to advance the dungeon raid.")
+					return
+				
+				
+				Global.dungeon_people -= Global.d_people_remove
+				Global.dungeon_resources -= Global.d_resources_remove
+				Global.dungeon_food -= Global.d_food_remove
+				Global.dungeon_gold -= Global.d_gold_remove
+				
+				Global.people -= Global.d_people_remove
+				Global.resources -= Global.d_resources_remove
+				Global.food -= Global.d_food_remove
+				Global.gold -= Global.d_gold_remove
+				
+				set_menu_info()
+				
+				animate_icon($UI/TopMenu/Food/Icon.get_path())
+				animate_icon($UI/TopMenu/Resources/Icon.get_path())
+				animate_icon($UI/TopMenu/People/Icon.get_path())
+				animate_icon($UI/TopMenu/Gold/Icon.get_path())
+				
+				animate_icon($UI/TopMenu/D_Food/Icon.get_path())
+				animate_icon($UI/TopMenu/D_Resources/Icon.get_path())
+				animate_icon($UI/TopMenu/D_Poeple/Icon.get_path())
+				animate_icon($UI/TopMenu/D_Gold/Icon.get_path())
+				
+				animate($Dungeon/Sprite.get_path())
+				
 			_:
 				print("oops... ",building_name)
 
@@ -241,7 +274,7 @@ func _on_Building_mouse_entered(building_name):
 		"Village":
 			info_text("Village",$Village.position + Vector2(0,-50))
 		"Dungeon":
-			info_text("Dungeon",$Dungeon.position + Vector2(0,-50))
+			info_text(str("Raid cost:\nFood - ",Global.d_food_remove,"\nPeople - ",Global.d_people_remove,"\nResources - ",Global.d_resources_remove,"\nGold - ",Global.d_gold_remove),$Dungeon.position + Vector2(0,-100))
 		_:
 			print(building_name)
 
@@ -274,11 +307,11 @@ func _on_Tween_tween_completed(object, key):
 				$Tween.start()
 				$Tween.interpolate_property($Dark,"energy",$Dark.energy,0,0.5,Tween.TRANS_CUBIC,Tween.EASE_OUT)
 				$Tween.start()
-				Global.food -= round(Global.food * 0.25) if Global.food > 35 else 15
-				Global.people -= round(Global.people * 0.25) if Global.people > 15 else 5
-				Global.resources -= round(Global.resources * 0.25) if Global.resources > 35 else 20
-				Global.gold -= round(Global.gold * 0.25) if Global.gold > 400 else 100
-				set_menu_info_nopar()
+				Global.food -= round(Global.food * 0.5) if Global.food > 50 else 30
+				Global.people -= round(Global.people * 0.5) if Global.people > 20 else 12
+				Global.resources -= round(Global.resources * 0.5) if Global.resources > 50 else 30
+				Global.gold -= round(Global.gold * 0.5) if Global.gold > 400 else 225
+				set_menu_info()
 				up = true
 			else:
 				$Tween.interpolate_property($Demon,"position",$Demon.position,$Demon.position-Vector2(0,100),20,Tween.TRANS_CUBIC,Tween.EASE_OUT)
@@ -360,25 +393,25 @@ func _on_God_button_down(namee):
 		"Kaja":
 			if Global.gold > 0:
 				Global.gold -= 200
-				Global.food += 100
+				Global.food += Global.god_food_blessing
 		"Anyag":
 			if Global.gold > 0:
 				Global.gold -= 200
-				Global.resources += 100
+				Global.resources += Global.god_resources_blessing
 		"Ember":
 			if Global.gold > 0:
 				Global.gold -= 200
-				Global.people += 50
+				Global.people += Global.god_people_blessing
 		"Arany":
 			if Global.people > 0 and Global.resources > 0 and Global.food > 0:
-				Global.gold += 1000
+				Global.gold += Global.god_gold_blessing
 				Global.resources -= 100
 				Global.food -= 50
 				Global.people -= 20
 	
 	click_info("The gods have accepted your sacrifice.",Color("#f7bc33"))
 	
-	set_menu_info_nopar()
+	set_menu_info()
 	_on_PopupButton_button_down()
 	
 	$Timers/GodTimer.start()

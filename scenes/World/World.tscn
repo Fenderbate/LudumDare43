@@ -135,7 +135,6 @@ one_shot = true
 autostart = false
 
 [node name="UI" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 1
 offset = Vector2( 0, 0 )
 rotation = 0.0
@@ -173,7 +172,6 @@ playback/repeat = false
 playback/speed = 1.0
 
 [node name="TopMenu" type="ColorRect" parent="UI"]
-editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -233,6 +231,7 @@ lines_skipped = 0
 max_lines_visible = -1
 
 [node name="People" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
 light_mask = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -363,6 +362,199 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="D_Background" type="ColorRect" parent="UI/TopMenu"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 688.0
+margin_right = 1280.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.0745098, 0.105882, 0.188235, 1 )
+
+[node name="D_Food" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 800.0
+margin_right = 920.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 40 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Icon" type="Sprite" parent="UI/TopMenu/D_Food"]
+light_mask = 0
+position = Vector2( 20, 25 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="Value" type="Label" parent="UI/TopMenu/D_Food"]
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_right = 160.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="D_Poeple" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 920.0
+margin_right = 1040.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 40 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Icon" type="Sprite" parent="UI/TopMenu/D_Poeple"]
+light_mask = 0
+position = Vector2( 19, 24 )
+texture = ExtResource( 6 )
+
+[node name="Value" type="Label" parent="UI/TopMenu/D_Poeple"]
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_right = 160.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="D_Resources" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1040.0
+margin_right = 1160.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 40 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Icon" type="Sprite" parent="UI/TopMenu/D_Resources"]
+light_mask = 0
+position = Vector2( 17, 28 )
+texture = ExtResource( 7 )
+
+[node name="Value" type="Label" parent="UI/TopMenu/D_Resources"]
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_right = 160.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="D_Gold" type="Control" parent="UI/TopMenu"]
+editor/display_folded = true
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1160.0
+margin_right = 1280.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 120, 40 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="Icon" type="Sprite" parent="UI/TopMenu/D_Gold"]
+light_mask = 0
+position = Vector2( 20, 20 )
+texture = ExtResource( 8 )
+
+[node name="Value" type="Label" parent="UI/TopMenu/D_Gold"]
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_right = 160.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Text" type="Label" parent="UI/TopMenu"]
 light_mask = 0
 anchor_left = 0.0
@@ -387,7 +579,34 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="DungeonText" type="Label" parent="UI/TopMenu"]
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 695.0
+margin_top = -1.0
+margin_right = 819.0
+margin_bottom = 67.0
+rect_scale = Vector2( 0.8, 0.8 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 5 )
+text = "Resources for
+the dungeon"
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="BotMenu" type="ColorRect" parent="UI"]
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -790,9 +1009,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -105.0
+margin_left = -103.0
 margin_top = -54.0
-margin_right = 1417.0
+margin_right = 1419.0
 margin_bottom = 522.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -909,7 +1128,6 @@ position = Vector2( -76.2837, 69.7589 )
 texture = ExtResource( 16 )
 
 [node name="Dungeon" type="Area2D" parent="."]
-editor/display_folded = true
 position = Vector2( 996, 592 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -924,6 +1142,9 @@ shape = SubResource( 5 )
 
 [node name="WidgetPivot" type="Position2D" parent="Dungeon"]
 position = Vector2( -76.2837, 69.7589 )
+
+[node name="Sprite" type="Sprite" parent="Dungeon"]
+texture = ExtResource( 11 )
 
 [node name="Info" type="Label" parent="."]
 light_mask = 0
